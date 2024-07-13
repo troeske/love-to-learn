@@ -1,88 +1,37 @@
-(function () {
-    var DELIMITER = ',';
-    var NEWLINE = '\n';
-    var qRegex = /^"|"$/g;
-    var i = document.getElementById('file');
-    var table = document.getElementById('table');
+// Function to convert CSV text into an array of objects basic structure provided by Github Copilot
+function csvToArray(csvText) {
+    const csvNEWLINE = '\n';
+    const csvDELIMITER = ',';
+    
+    let lines = csvText.split(csvNEWLINE);
+    let headers = lines[0].split(csvDELIMITER);
 
-    if (!i) {
+    return lines.slice(1).map(line => {
+        const values = line.split(csvDELIMITER);
+        return headers.reduce((acc, header, index) => {
+            acc[header] = values[index];
+            return acc;
+        }, {});
+    });
+}
+
+// Function to handle file selection
+function handleFileSelect(event) {
+    let file = event.target.files[0];
+    
+    if (!file) {
         return;
     }
 
-    i.addEventListener('change', function () {
-        if (!!i.files && i.files.length > 0) {
-            parseCSV(i.files[0]);
-        }
-    });
+    let reader = new FileReader();
+    reader.onload = function(e) {
+        let text = e.target.result;
+        let data = csvToArray(text);
 
-    function parseCSV(file) {
-        if (!file || !FileReader) {
-            return;
-        }
+        console.log(data); // For demonstration, log the array to the console
+        // You can process the data array further here
+    };
+    reader.readAsText(file);
+}
 
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-            toTable(e.target.result);
-        };
-
-        reader.readAsText(file);
-    }
-
-    function toTable(text) {
-        if (!text || !table) {
-            return;
-        }
-
-        // clear table
-        while (!!table.lastElementChild) {
-            table.removeChild(table.lastElementChild);
-        }
-
-        var rows = text.split(NEWLINE);
-        var headers = rows.shift().trim().split(DELIMITER);
-        var htr = document.createElement('tr');
-
-        headers.forEach(function (h) {
-            var th = document.createElement('th');
-            var ht = h.trim();
-
-            if (!ht) {
-                return;
-            }
-
-            th.textContent = ht.replace(qRegex, '');
-            htr.appendChild(th);
-        });
-
-        table.appendChild(htr);
-
-        var rtr;
-
-        rows.forEach(function (r) {
-            r = r.trim();
-
-            if (!r) {
-                return;
-            }
-
-            var cols = r.split(DELIMITER);
-
-            if (cols.length === 0) {
-                return;
-            }
-
-            rtr = document.createElement('tr');
-
-            cols.forEach(function (c) {
-                var td = document.createElement('td');
-                var tc = c.trim();
-
-                td.textContent = tc.replace(qRegex, '');
-                rtr.appendChild(td);
-            });
-
-            table.appendChild(rtr);
-        });
-    }
-})();
+document.getElementById('csvFileInput').addEventListener('change', handleFileSelect);
