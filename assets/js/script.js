@@ -10,10 +10,10 @@ function csvToArray(csvText) {
     const csvDELIMITER = ',';
     
     let lines = csvText.split(csvNEWLINE);
-    let headers = lines[0].split(csvDELIMITER);
+    let headers = lines[0].split(csvDELIMITER).map(header => header.trim());
 
     return lines.slice(1).map(line => {
-        let values = line.split(csvDELIMITER);
+        let values = line.split(csvDELIMITER).map(value => value.trim());
         return headers.reduce((acc, header, index) => {
             acc[header] = values[index];
             return acc;
