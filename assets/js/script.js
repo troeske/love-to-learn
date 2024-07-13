@@ -1,5 +1,11 @@
-// Function to convert CSV text into an array of objects basic structure provided by Github Copilot
+
+/**
+ * Function to handle CSV to Array conversion
+ * @param {csvText} from FileReader 
+ * @returns array of objects with headers as keys
+ */
 function csvToArray(csvText) {
+   //basic structure provided by Github Copilot
     const csvNEWLINE = '\n';
     const csvDELIMITER = ',';
     
@@ -7,7 +13,7 @@ function csvToArray(csvText) {
     let headers = lines[0].split(csvDELIMITER);
 
     return lines.slice(1).map(line => {
-        const values = line.split(csvDELIMITER);
+        let values = line.split(csvDELIMITER);
         return headers.reduce((acc, header, index) => {
             acc[header] = values[index];
             return acc;
@@ -15,8 +21,13 @@ function csvToArray(csvText) {
     });
 }
 
-// Function to handle file selection
+/**
+ * Function to handle file selection and ReadAsText
+ * @param {event}  
+ * @returns 
+ */
 function handleFileSelect(event) {
+    //basic structure provided by Github Copilot
     let file = event.target.files[0];
     
     if (!file) {
