@@ -1,0 +1,4 @@
+/* hidding the input element that handles the .csv select file */
+#csvFileInput {
+    display: none;
+}

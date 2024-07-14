@@ -45,4 +45,11 @@ function handleFileSelect(event) {
     reader.readAsText(file);
 }
 
+// Event listeners
+document.getElementById('csvFileUpload-btn').addEventListener('click', function() {
+    document.getElementById('csvFileInput').click();
+});
+
 document.getElementById('csvFileInput').addEventListener('change', handleFileSelect);
+
+
