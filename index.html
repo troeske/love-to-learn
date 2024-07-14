@@ -30,9 +30,13 @@
             
             <!-- navigation through the learning card stack -->
             <div class="card-header">
-                <button class="prev"></button>
+                <button class="prev">
+                    <i class="fa-solid fa-circle-chevron-left"></i>
+                </button>
                 <p id="location"><span id="current-card">4</span> / <span id="total_cards">42</span></p>
-                <button class="next"></button>
+                <button class="next">
+                    <i class="fa-solid fa-circle-chevron-right"></i>
+                </button>
             </div>
             
             <!-- this is the area where the word to learn is shown -->
@@ -55,7 +59,9 @@
         </div>
 
         <!-- flip the card to enter/show the translation -->
-        <button id="flip-card"></button>
+        <button id="flip-card">
+            <i class="fa-regular fa-reply"></i>
+        </button>
 
         <div id="results-area">
             <p>got it: <span id="correct">4</span>  to improve: <span id="incorrect">2</span></p>
