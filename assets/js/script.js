@@ -20,6 +20,16 @@ function csvToArray(csvText) {
         }, {});
     });
 }
+/* draw the line under the l1 word dynamically based on the length of the word */
+document.addEventListener("DOMContentLoaded", function() {
+    var wordL1 = document.querySelector('.word-l1'); // Select the .word-l1 element
+    var divider = document.querySelector('.hand-drawn-divider'); // Select the .hand-drawn-divider element
+  
+    if (wordL1 && divider) {
+      var width = wordL1.offsetWidth; // Get the width of the .word-l1 element
+      divider.style.width = width + 'px'; // Set the width of the .hand-drawn-divider to match
+    }
+  });
 
 /**
  * Function to handle file selection and ReadAsText

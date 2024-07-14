@@ -1,4 +1,106 @@
+body {
+    font-family: 'Roboto', sans-serif; 
+    margin: 0; 
+    padding: 0; 
+    background-color: grey; 
+}
 
+/* heading of the page */
+.heading {
+    font-family: 'Roboto', sans-serif; 
+    text-align: center; 
+    margin-top: 20%; 
+    margin-bottom: 5%; 
+}
+
+.heading h1 {
+    font-size: 1.5em; 
+    font-weight: bold; 
+    margin: 20px 0 120px 0;
+    text-transform: uppercase;
+
+}
+
+.heading h2 {
+    font-size: 0.9em; 
+ /*    margin: 10px 0; */
+}
+
+/* card-area */
+.card-front {
+    background-color: whitesmoke;
+    border: 1px solid #ccc; /* Border around the card */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Nice shadow around the div */
+    position: relative; /* Needed for absolute positioning of children */
+    padding: 6px 15px; /* Padding inside the card */
+    width: 60%;
+    height: 150px;
+    margin: 40px auto; /* Center horizontally */
+    display: block; /* Ensure it's treated as a block-level element */
+}
+
+.card-header {
+    display: grid; /* Use grid layout */
+    grid-template-columns: 5% 90% 5%; 
+    justify-content: center; 
+    align-items: center;
+    padding: 0;
+    font-size: 80%;
+}
+
+.card-header .next, .card-header .prev, .card-header p {
+    justify-self: center; 
+    margin: 0;
+}
+
+.word-l1 {
+    position: absolute;
+    font-size: 1em;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Vertically and horizontally centered */
+    top: 75px;
+}
+
+.hand-drawn-divider {
+    position: absolute;
+    border-bottom: 2px dashed; 
+    left: 50%;
+    transform: translate(-50%, -50%); /* Vertically and horizontally centered */
+    color: black;
+    width: 30%;
+    margin: 0px auto; 
+    top: 90px;
+  }
+
+.card-nav {
+    position: absolute; 
+    display:flex;
+    top: 115px; 
+    gap: 5px; 
+    left: 50%;
+    margin: 0px auto; 
+    transform: translate(-50%, -50%); /* Vertically and horizontally centered */
+    justify-content: center; /* Center the buttons horizontally */
+}
+
+.add-card, .trash-card {
+   border: none;
+   font-size: 1em;
+}
+
+.card {
+    position: relative; /* Ensure the .card div is positioned */
+    /* Other styles for .card */
+}
+
+#flip-card {
+    position: relative; /* Position the button absolutely relative to its nearest positioned ancestor */
+    right: 15px; /* Adjust as needed to position close to the right edge */
+    top: 10px; /* Adjust as needed to position below the .card div */
+    border: 1px solid black;
+    width: 15px;
+    height: 15px;
+}
 /* Style for the bottom navigation */
 .bottom-nav {
     position: fixed; 
@@ -28,7 +130,7 @@
     color: black;
     padding: 10px; 
     margin: 0 10px; 
-    font-size: 18px; 
+    font-size: 24px; 
     min-width: 30px; 
     min-height: 30px; 
     display: flex; 
