@@ -31,6 +31,25 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 
+  document.addEventListener('DOMContentLoaded', function() {
+    // Select both flip buttons
+    var flipButtonFront = document.querySelector('#flip-card');
+    var flipButtonBack = document.querySelector('#flip-card-back');
+    // Select the card container
+    var card = document.querySelector('.card');
+  
+    // Add click event listener to the flip button on the front side
+    flipButtonFront.addEventListener('click', function() {
+      card.classList.add('is-flipped');
+    });
+  
+    // Add click event listener to the flip button on the back side
+    flipButtonBack.addEventListener('click', function() {
+      card.classList.remove('is-flipped');
+    });
+  });
+  
+
 /**
  * Function to handle file selection and ReadAsText
  * @param {event}  
