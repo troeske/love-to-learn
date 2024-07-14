@@ -121,6 +121,10 @@ body {
     transform: rotate(150deg);
 }
 
+.card-back {
+    display: none;
+}
+
 /* display results / score */
 #results-area {
     display: flex; 
