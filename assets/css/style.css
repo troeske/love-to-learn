@@ -94,6 +94,7 @@ body {
 
 .card {
     width: 63%; 
+    border-radius: 30px; 
     height: 170px; 
     position: relative;
     margin: 50px auto;
@@ -123,12 +124,13 @@ body {
     display: block;
     transform: rotateY(180deg); /* Rotate the back card so it faces back */
     -webkit-box-shadow: 7px 5px 15px 5px #828282; 
-    box-shadow: 7px 5px 15px 5px #828282;
+    border-radius: 30px; 
 }
 
 .card-front {
     -webkit-box-shadow: 7px 5px 15px 5px #828282; 
     box-shadow: 7px 5px 15px 5px #828282;
+    border-radius: 30px; 
 }
 
 .card-header {
@@ -136,7 +138,7 @@ body {
     grid-template-columns: 5% 90% 5%; 
     justify-content: center; 
     align-items: center;
-    padding: 5px 10px;
+    padding: 10px 15px;
     margin: 0 10px 0 0;
     font-size: 80%;
     color: black;

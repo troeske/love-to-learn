@@ -73,6 +73,22 @@ function csvToArray(csvText) {
     });
 }
 
+function deleteCurrentCard() {
+  let i = parseInt(document.getElementById('current-card-front').textContent) - 1;
+  let myDeletedCard = myExerciseBook.splice(i, 1);
+  
+  /* let's correct the display after deletion  */
+  document.getElementById('current-card-front').textContent = i + 1;
+  document.getElementById('total-cards-front').textContent = myExerciseBook.length;
+  
+  document.getElementById('current-card-back').textContent = i + 1;
+  document.getElementById('total-cards-back').textContent = myExerciseBook.length;
+
+  /* and display the new word */
+  document.getElementById('original').textContent = myExerciseBook[i].l1;
+  drawDividerFront();
+}
+
 /**
  * Function to handle the next card button
  * @returns: updates the card with the next word in the list
@@ -270,6 +286,10 @@ document.getElementById("translation").addEventListener("keydown", function(even
     document.getElementById("translation").placeholder = ""
   }
 })
+
+/* EventListner for the trash button on the front of the card */
+document.getElementById('trash-card').addEventListener('click', deleteCurrentCard);
+
 
 /* EventListners for the card-back card-nav buttons*/
 document.getElementById('enter-btn').addEventListener('click', checkTranslation);
