@@ -21,6 +21,8 @@
     <!-- <i class="fa-brands fa-creative-commons-nd"></i> -->
     <section class="heading">
         <h1>love to learn</h1>
+        <h2 id="userName"></h2>
+        <br>    
         <h2 id="exercise-book"></h2>
         <h2 id="topic"></h2>
         <h2 id="languages"></h2>
@@ -51,11 +53,11 @@
 
                     <!-- on-card-navigation -->
                     <div class="card-nav">
-                        <button class="add-card">
+                        <button id="add-card" class="card-btn">
                             <i class="fa-regular fa-square-plus"></i>
                         </button>
 
-                        <button class="trash-card">
+                        <button id="trash-card" class="card-btn">
                             <i class="fa-regular fa-trash-can"></i>
                         </button>
                     </div>
@@ -80,19 +82,22 @@
                     
                     <!-- this is the area where the word to learn is shown -->
                     <div class="word">
-                        <p id="translation"></p>    
+                        <p id="translation"></p> 
+                        <button id="enter-btn" class="card-btn">
+                            <i class="fa-solid fa-arrow-turn-down fa-rotate-90"></i>
+                        </button>    
                     </div>
                     
                     <div id="divider-back"></div>
 
-                    <!-- on-card-navigation -->
+                    <!-- on-card-navigation is different from the front -->
                     <div class="card-nav">
-                        <button class="add-card">
-                            <i class="fa-regular fa-square-plus"></i>
+                        <button id="is-correct" class="card-btn">
+                            <i class="fa-regular fa-circle-check"></i>
                         </button>
 
-                        <button class="trash-card">
-                            <i class="fa-regular fa-trash-can"></i>
+                        <button id="is-incorrect" class="card-btn">
+                            <i class="fa-regular fa-circle-xmark"></i>
                         </button>
                     </div>
 

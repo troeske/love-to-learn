@@ -22,8 +22,9 @@ body {
 .heading {
     font-family: 'Roboto', sans-serif; 
     text-align: center; 
-    margin-top: 10%; 
-    margin-bottom: 8%; 
+    margin: 10% auto 8%; 
+    width: 80%; 
+
 }
 
 .heading h1 {
@@ -35,6 +36,7 @@ body {
 
 .heading h2 {
     font-size: 1.2em; 
+    text-wrap: wrap;
 }
 
 /* card-area */
@@ -143,9 +145,17 @@ body {
     justify-content: center; 
 }
 
-.add-card, .trash-card {
+.card-btn {
    border: none;
-   font-size: 1em;
+   font-size: 1.3em;
+}
+
+#enter-btn {
+    font-size: 1em;
+    position: absolute;
+    top: 5px;
+    right: -30px;
+    margin: 0;
 }
 
 #flip-card, #flip-card-back {

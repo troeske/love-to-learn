@@ -2,6 +2,17 @@
 var myExerciseBook = []; // global array of objects to store the vocabularies to be learned
 
 /**
+ * Function to greet the user, called when page is loaded 
+ * @returns: prompts the user for their name and updates the greeting on the page
+ */ 
+function greetUser() {
+  let name = prompt("What is your name?");
+  if (name != null) {
+    document.getElementById("userName").textContent = "Hey " + name + "! Let's learn!";
+  }
+}
+
+/**
  * Function to handle CSV to Array conversion
  * @param {csvText} from FileReader 
  * @returns array of objects with headers as keys
@@ -40,7 +51,6 @@ function nextCard() {
     document.getElementById('languages').textContent = myExerciseBook[i].languages; 
     document.getElementById('exercise-book').textContent = myExerciseBook[i].myBook; 
     document.getElementById('topic').textContent = myExerciseBook[i].topic;
-    document.getElementById('author').textContent = myExerciseBook[i].author;
     document.getElementById('current-card-front').textContent = i + 1;
     document.getElementById('current-card-back').textContent = i + 1;
     document.getElementById('correct').textContent = ""
@@ -65,7 +75,6 @@ function prevCard() {
     document.getElementById('languages').textContent = myExerciseBook[i].languages; 
     document.getElementById('exercise-book').textContent = myExerciseBook[i].myBook; 
     document.getElementById('topic').textContent = myExerciseBook[i].topic;
-    document.getElementById('author').textContent = myExerciseBook[i].author;
     document.getElementById('current-card-front').textContent = i + 1;
     document.getElementById('current-card-back').textContent = i + 1;
     document.getElementById('correct').textContent = ""
@@ -121,7 +130,6 @@ function handleFileSelect(event) {
         document.getElementById('languages').textContent = myExerciseBook[0].languages; 
         document.getElementById('exercise-book').textContent = myExerciseBook[0].myBook; 
         document.getElementById('topic').textContent = myExerciseBook[0].topic;
-        document.getElementById('author').textContent = myExerciseBook[0].author;
         
         /* let's store the array row in the card header as location. Adding 1 to make it human readable */
         document.getElementById('current-card-front').textContent = i + 1;
@@ -187,4 +195,7 @@ document.addEventListener('DOMContentLoaded', function() {
   flipButtonBack.addEventListener('click', function() {
     card.classList.remove('is-flipped');
   });
+  /* ask for the users name - we are a polite app after all */
+  greetUser();
+
 });
