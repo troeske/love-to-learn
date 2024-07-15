@@ -81,7 +81,7 @@ body {
     margin: 0;
 }
 
-.next, .prev {
+#next-btn-front, #prev-btn-front, #next-btn-back, #prev-btn-back {
     border: none;
     background: none;
     font-size: 1.5em;

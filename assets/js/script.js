@@ -23,6 +23,56 @@ function csvToArray(csvText) {
     });
 }
 
+/**
+ * Function to handle the next card button
+ * @returns: updates the card with the next word in the list
+ * @returns: updates the card header with the current card number
+ */
+function nextCard() {
+  let i = parseInt(document.getElementById('current-card-front').textContent) - 1;
+  let totalCards = parseInt(document.getElementById('total-cards-front').textContent);
+  if (i < totalCards - 1) {
+    i++;
+    document.getElementById('original').textContent = myExerciseBook[i].l1;
+    drawDividerFront();
+    document.getElementById('translation').textContent = myExerciseBook[i].l2; 
+    drawDividerBack();
+    document.getElementById('languages').textContent = myExerciseBook[i].languages; 
+    document.getElementById('exercise-book').textContent = myExerciseBook[i].myBook; 
+    document.getElementById('topic').textContent = myExerciseBook[i].topic;
+    document.getElementById('author').textContent = myExerciseBook[i].author;
+    document.getElementById('current-card-front').textContent = i + 1;
+    document.getElementById('current-card-back').textContent = i + 1;
+    document.getElementById('correct').textContent = ""
+    document.getElementById('incorrect').textContent = ""
+  }
+}
+
+/**
+ * Function to handle the previous card button
+ * @returns: updates the card with the previous word in the list
+ * @returns: updates the card header with the current card number
+ */
+function prevCard() {
+  let i = parseInt(document.getElementById('current-card-front').textContent) - 1;
+  let totalCards = parseInt(document.getElementById('total-cards-front').textContent);
+  if (i > 0) {
+    i--;
+    document.getElementById('original').textContent = myExerciseBook[i].l1;
+    drawDividerFront();
+    document.getElementById('translation').textContent = myExerciseBook[i].l2; 
+    drawDividerBack();
+    document.getElementById('languages').textContent = myExerciseBook[i].languages; 
+    document.getElementById('exercise-book').textContent = myExerciseBook[i].myBook; 
+    document.getElementById('topic').textContent = myExerciseBook[i].topic;
+    document.getElementById('author').textContent = myExerciseBook[i].author;
+    document.getElementById('current-card-front').textContent = i + 1;
+    document.getElementById('current-card-back').textContent = i + 1;
+    document.getElementById('correct').textContent = ""
+    document.getElementById('incorrect').textContent = ""
+  }
+}
+
 function drawDividerFront() {
   let wordL1 = document.querySelector('#original'); 
   let dividerL1 = document.querySelector('#divider-front'); 
@@ -103,6 +153,18 @@ document.getElementById('csvFileInput').addEventListener('change', handleFileSel
  */ 
 document.getElementById('original').addEventListener('change', drawDividerFront);
 document.getElementById('original').addEventListener('change', drawDividerBack);
+
+/**
+ * EventListner for the next button
+ */
+document.getElementById('next-btn-front').addEventListener('click', nextCard);
+document.getElementById('next-btn-back').addEventListener('click', nextCard);
+
+/**
+ * EventListner for the previous button
+ */
+document.getElementById('prev-btn-back').addEventListener('click', prevCard);
+document.getElementById('prev-btn-front').addEventListener('click', prevCard);
 
 /**
 * EventListner for the flip card functionality
