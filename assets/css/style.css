@@ -1,23 +1,35 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* General styles */
 body {
+    min-height: 100vh;
     font-family: 'Roboto', sans-serif;
     color: white; 
     margin: 0; 
     padding: 0; 
     background: rgb(0,9,3);
+    height: 100vh;
+    left: 0;
+    position: relative;
+    top: 0;
 }
 
 /* heading of the page */
 .heading {
     font-family: 'Roboto', sans-serif; 
     text-align: center; 
-    margin-top: 15%; 
+    margin-top: 10%; 
     margin-bottom: 8%; 
 }
 
 .heading h1 {
     font-size: 1.6em; 
     font-weight: bold; 
-    margin: 15px 0 90px 0;
+    margin: 15px 0 75px 0;
     text-transform: uppercase;
 }
 
@@ -40,9 +52,6 @@ body {
     transition: transform 0.6s;
     background-color: whitesmoke;
     border: 2px solid #bbb; 
-    box-shadow: 
-        10px 10px 30px rgba(255, 255, 255, 0.2),
-        8px 8px 8px rgba(255, 255, 255, 0.2);
     position: relative; 
     padding: 6px 15px; 
   }
@@ -64,7 +73,14 @@ body {
 .card-back {
     display: block;
     transform: rotateY(180deg); /* Rotate the back card so it faces back */
-  }
+    -webkit-box-shadow: 7px 5px 15px 5px #828282; 
+    box-shadow: 7px 5px 15px 5px #828282;
+}
+
+.card-front {
+    -webkit-box-shadow: 7px 5px 15px 5px #828282; 
+    box-shadow: 7px 5px 15px 5px #828282;
+}
 
 .card-header {
     display: grid; /* Use grid layout */
@@ -72,6 +88,7 @@ body {
     justify-content: center; 
     align-items: center;
     padding: 5px 10px;
+    margin: 0 10px 0 0;
     font-size: 80%;
     color: black;
 }
@@ -148,7 +165,7 @@ body {
     display: flex; 
     justify-content: center; 
     align-items: center; 
-    margin-top: 5px; 
+    margin-top: 8px; 
     font-size: 1em; 
 }
 
@@ -169,7 +186,7 @@ body {
 /* Style for the bottom navigation */
 .bottom-nav {
     position: fixed; 
-    bottom: 5%; 
+    bottom: 10%; 
     left: 50%; 
     transform: translateX(-50%); /* Adjust for true centering */
     display: flex; 
