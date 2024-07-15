@@ -23,6 +23,26 @@ function csvToArray(csvText) {
     });
 }
 
+function drawDividerFront() {
+  let wordL1 = document.querySelector('#original'); 
+  let dividerL1 = document.querySelector('#divider-front'); 
+
+  if (wordL1 && dividerL1) {
+    let width = wordL1.offsetWidth; 
+    dividerL1.style.width = width + 'px'; // Set the width of the .hand-drawn-divider for original to match
+  }
+};
+
+function drawDividerBack() {
+  let wordL2 = document.querySelector('#translation'); 
+  let dividerL2 = document.querySelector('#divider-back'); 
+
+  if (wordL2 && dividerL2) {
+    let width = wordL2.offsetWidth; 
+    dividerL2.style.width = width + 'px'; // Set the width of the .hand-drawn-divider for transaltion to match
+  }
+};
+
 /**
  * Function to handle file selection and ReadAsText
  * @param {event}  
@@ -45,15 +65,23 @@ function handleFileSelect(event) {
         // let's show the first word in the list on the learning card on the page
         let i = 0; // index of the first word in the list
         document.getElementById('original').textContent = myExerciseBook[0].l1;
+        drawDividerFront();
         document.getElementById('translation').textContent = myExerciseBook[0].l2; 
+        drawDividerBack();
         document.getElementById('languages').textContent = myExerciseBook[0].languages; 
         document.getElementById('exercise-book').textContent = myExerciseBook[0].myBook; 
         document.getElementById('topic').textContent = myExerciseBook[0].topic;
         document.getElementById('author').textContent = myExerciseBook[0].author;
         
         /* let's store the array row in the card header as location. Adding 1 to make it human readable */
-        document.getElementById('current-card').textContent = i + 1;
-        document.getElementById('total-cards').textContent = myExerciseBook.length;
+        document.getElementById('current-card-front').textContent = i + 1;
+        document.getElementById('total-cards-front').textContent = myExerciseBook.length;
+        document.getElementById('current-card-back').textContent = i + 1;
+        document.getElementById('total-cards-back').textContent = myExerciseBook.length;
+
+        /* let's clean the right / wrong counter */
+        document.getElementById('correct').textContent = ""
+        document.getElementById('incorrect').textContent = ""
     };
     reader.readAsText(file);
 }
@@ -73,15 +101,8 @@ document.getElementById('csvFileInput').addEventListener('change', handleFileSel
 /**
  * EventListner to draw the line under the l1 word dynamically based on the length of the word 
  */ 
-document.addEventListener("DOMContentLoaded", function() {
-  let wordL1 = document.querySelector('.word-l1'); 
-  let divider = document.querySelector('.hand-drawn-divider'); 
-
-  if (wordL1 && divider) {
-    let width = wordL1.offsetWidth; 
-    divider.style.width = width + 'px'; // Set the width of the .hand-drawn-divider to match
-  }
-});
+document.getElementById('original').addEventListener('change', drawDividerFront);
+document.getElementById('original').addEventListener('change', drawDividerBack);
 
 /**
 * EventListner for the flip card functionality

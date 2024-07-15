@@ -104,7 +104,7 @@ body {
     font-weight: bold;
 }
 
-.hand-drawn-divider {
+#divider-front, #divider-back {
     position: absolute;
     border-bottom: 2px dashed; 
     left: 50%;
