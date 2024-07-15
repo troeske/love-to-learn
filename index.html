@@ -96,9 +96,9 @@
                         </button>
                     </div>
                     
-                    <!-- this is the area where the word to learn is shown -->
+                    <!-- this is the area where the user enters and/or looks up the word to learn -->
                     <div class="word">
-                        <p id="translation"></p> 
+                        <input type="text" id="translation" placeholder="Enter the translation"> 
                         <button id="enter-btn" class="card-btn">
                             <i class="fa-solid fa-arrow-turn-down fa-rotate-90"></i>
                         </button>    
@@ -108,6 +108,10 @@
 
                     <!-- on-card-navigation is different from the front -->
                     <div class="card-nav">
+                        <button id="show-me" class="card-btn">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+
                         <button id="is-correct" class="card-btn">
                             <i class="fa-regular fa-circle-check"></i>
                         </button>
@@ -126,7 +130,7 @@
         </div>
 
         <div id="results-area">
-            <p>got it: <span id="correct"></span><span class="divider">|</span>to improve: <span id="incorrect"></span></p>
+            <p>got it: <span id="correct">0</span><span class="divider">|</span>to improve: <span id="incorrect">0</span></p>
         </div>
 
     </section>

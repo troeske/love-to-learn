@@ -164,6 +164,14 @@ body {
     font-weight: bold;
 }
 
+.word input {
+    border: none;
+    text-align: center;
+    color: black;
+    width: 150px;
+    font-weight: bold;
+}
+
 #divider-front, #divider-back {
     position: absolute;
     border-bottom: 2px dashed; 

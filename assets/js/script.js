@@ -13,6 +13,17 @@ function greetUser() {
   modal.style.display = "block";
 
   document.getElementById('userNameInput').focus();
+  document.getElementById("userNameInput").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+      var userName = document.getElementById('userNameInput').value;
+      if (userName.trim() !== "") {
+        document.getElementById("userName").textContent = userName;
+        modal.style.display = "none";
+      } else {
+        document.getElementById("userName").textContent = "Mr./Mrs. Incognito";
+      }
+    }
+  })
 
   // When the user clicks on the cancel button, close the modal
   document.getElementById('cancelName').addEventListener('click', function() {
@@ -74,15 +85,14 @@ function nextCard() {
     i++;
     document.getElementById('original').textContent = myExerciseBook[i].l1;
     drawDividerFront();
-    document.getElementById('translation').textContent = myExerciseBook[i].l2; 
-    drawDividerBack();
     document.getElementById('languages').textContent = myExerciseBook[i].languages; 
     document.getElementById('exercise-book').textContent = myExerciseBook[i].myBook; 
     document.getElementById('topic').textContent = myExerciseBook[i].topic;
     document.getElementById('current-card-front').textContent = i + 1;
     document.getElementById('current-card-back').textContent = i + 1;
-    document.getElementById('correct').textContent = ""
-    document.getElementById('incorrect').textContent = ""
+    
+    /* let's clean-up the input area for the next card */
+    visualizeResultClean();
   }
 }
 
@@ -93,20 +103,18 @@ function nextCard() {
  */
 function prevCard() {
   let i = parseInt(document.getElementById('current-card-front').textContent) - 1;
-  let totalCards = parseInt(document.getElementById('total-cards-front').textContent);
   if (i > 0) {
     i--;
     document.getElementById('original').textContent = myExerciseBook[i].l1;
     drawDividerFront();
-    document.getElementById('translation').textContent = myExerciseBook[i].l2; 
-    drawDividerBack();
     document.getElementById('languages').textContent = myExerciseBook[i].languages; 
     document.getElementById('exercise-book').textContent = myExerciseBook[i].myBook; 
     document.getElementById('topic').textContent = myExerciseBook[i].topic;
     document.getElementById('current-card-front').textContent = i + 1;
     document.getElementById('current-card-back').textContent = i + 1;
-    document.getElementById('correct').textContent = ""
-    document.getElementById('incorrect').textContent = ""
+
+    /* let's clean-up the input area for the next card */
+    visualizeResultClean();
   }
 }
 
@@ -131,6 +139,72 @@ function drawDividerBack() {
 };
 
 /**
+ * Function to check the translation
+ * @returns: updates the correct and incorrect counter
+ */
+function checkTranslation() {
+  let i = parseInt(document.getElementById('current-card-back').textContent) - 1;
+  let translation = document.getElementById('translation').value;
+  let correctTranslation = myExerciseBook[i].l2;
+  let correct = parseInt(document.getElementById('correct').textContent);
+  let incorrect = parseInt(document.getElementById('incorrect').textContent);
+
+  if (translation.trim().toLowerCase() === correctTranslation.trim().toLowerCase()) {
+    document.getElementById('correct').textContent = correct+1;
+    visualizeResult(true);
+  } else {
+    document.getElementById('incorrect').textContent = incorrect+1;
+    visualizeResult(false);
+  }
+}
+
+function showTranslation() {
+  let i = parseInt(document.getElementById('current-card-back').textContent) - 1;
+  let correctTranslation = myExerciseBook[i].l2;
+  document.getElementById('translation').value = correctTranslation;
+  document.getElementById('translation').style.color = "blue";
+}
+/**
+ * Function to visualize the result of the translation
+ * @param {true/false} correctResult 
+ * @returns: updates the background color of the card and the translation input field
+ */
+function visualizeResult(correctResult) {
+  let cardBack = document.getElementsByClassName('card-back')[0];
+  if (correctResult) {
+    cardBack.style.backgroundColor = "green";
+    document.getElementById('is-correct').style.backgroundColor = "green";
+    document.getElementById('is-incorrect').style.backgroundColor = "green";
+    document.getElementById('show-me').style.backgroundColor = "green";
+    document.getElementById('enter-btn').style.backgroundColor = "green";
+    document.getElementById('translation').style.backgroundColor = "green";
+  } else {
+    cardBack.style.backgroundColor = "red";
+    document.getElementById('is-correct').style.backgroundColor = "red";
+    document.getElementById('is-incorrect').style.backgroundColor = "red";
+    document.getElementById('show-me').style.backgroundColor = "red";
+    document.getElementById('enter-btn').style.backgroundColor = "red";
+    document.getElementById('translation').style.backgroundColor = "red";
+  }
+}
+
+/**
+ * Function to clean the result visualization
+ * @returns: resets the background color of the card and the translation input field
+ */
+function visualizeResultClean() {
+  let cardBack = document.getElementsByClassName('card-back')[0];
+  cardBack.style.backgroundColor = "white";
+  document.getElementById('is-correct').style.backgroundColor = "white";
+  document.getElementById('is-incorrect').style.backgroundColor = "white";
+  document.getElementById('show-me').style.backgroundColor = "white";
+  document.getElementById('enter-btn').style.backgroundColor = "white";
+  document.getElementById('translation').style.color = "black";
+  document.getElementById('translation').value = "";
+  document.getElementById('translation').style.backgroundColor = "white";
+}
+
+/**
  * Function to handle file selection and ReadAsText
  * @param {event}  
  * @returns: sets global variable myExerciseBook with array of objects with these properties:
@@ -153,8 +227,6 @@ function handleFileSelect(event) {
         let i = 0; // index of the first word in the list
         document.getElementById('original').textContent = myExerciseBook[0].l1;
         drawDividerFront();
-        document.getElementById('translation').textContent = myExerciseBook[0].l2; 
-        drawDividerBack();
         document.getElementById('languages').textContent = myExerciseBook[0].languages; 
         document.getElementById('exercise-book').textContent = myExerciseBook[0].myBook; 
         document.getElementById('topic').textContent = myExerciseBook[0].topic;
@@ -166,8 +238,8 @@ function handleFileSelect(event) {
         document.getElementById('total-cards-back').textContent = myExerciseBook.length;
 
         /* let's clean the right / wrong counter */
-        document.getElementById('correct').textContent = ""
-        document.getElementById('incorrect').textContent = ""
+        document.getElementById('correct').textContent = "0"
+        document.getElementById('incorrect').textContent = "0"
     };
     reader.readAsText(file);
 }
@@ -188,7 +260,36 @@ document.getElementById('csvFileInput').addEventListener('change', handleFileSel
  * EventListner to draw the line under the l1 word dynamically based on the length of the word 
  */ 
 document.getElementById('original').addEventListener('change', drawDividerFront);
-document.getElementById('original').addEventListener('change', drawDividerBack);
+document.getElementById('translation').addEventListener('change', drawDividerBack);
+
+/* EventListner for enter and click on submit button for translation text  */
+document.getElementById("translation").addEventListener("keydown", function(event) {
+  if (event.key === "Enter") {
+    checkTranslation();
+  } else {
+    document.getElementById("translation").placeholder = ""
+  }
+})
+
+/* EventListners for the card-back card-nav buttons*/
+document.getElementById('enter-btn').addEventListener('click', checkTranslation);
+document.getElementById('show-me').addEventListener('click', showTranslation);
+document.getElementById('is-correct').addEventListener('click', function() {
+  let correct = parseInt(document.getElementById('correct').textContent);
+  document.getElementById('correct').textContent = correct + 1;
+  visualizeResult(true);
+});
+
+document.getElementById('is-incorrect').addEventListener('click', function() {
+  let incorrect = parseInt(document.getElementById('incorrect').textContent);
+  document.getElementById('incorrect').textContent = incorrect + 1;
+  visualizeResult(false);
+
+});
+
+let correct = parseInt(document.getElementById('correct').textContent);
+let incorrect = parseInt(document.getElementById('incorrect').textContent);
+
 
 /**
  * EventListner for the next button
@@ -217,11 +318,14 @@ document.addEventListener('DOMContentLoaded', function() {
   // Add click event listener to the flip button on the front side
   flipButtonFront.addEventListener('click', function() {
     card.classList.add('is-flipped');
+    document.getElementById('translation').focus();
   });
 
   // Add click event listener to the flip button on the back side
   flipButtonBack.addEventListener('click', function() {
     card.classList.remove('is-flipped');
+    /* let's clean-up the input area for the next card */
+    visualizeResultClean();
   });
 
   /* ask for the users name - we are a polite app after all */
