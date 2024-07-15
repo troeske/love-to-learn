@@ -172,19 +172,19 @@ function showTranslation() {
 function visualizeResult(correctResult) {
   let cardBack = document.getElementsByClassName('card-back')[0];
   if (correctResult) {
-    cardBack.style.backgroundColor = "green";
-    document.getElementById('is-correct').style.backgroundColor = "green";
-    document.getElementById('is-incorrect').style.backgroundColor = "green";
-    document.getElementById('show-me').style.backgroundColor = "green";
-    document.getElementById('enter-btn').style.backgroundColor = "green";
-    document.getElementById('translation').style.backgroundColor = "green";
+    cardBack.style.backgroundColor = "#49fb35";
+    document.getElementById('is-correct').style.backgroundColor = "#49fb35";
+    document.getElementById('is-incorrect').style.backgroundColor = "#49fb35";
+    document.getElementById('show-me').style.backgroundColor = "#49fb35";
+    document.getElementById('enter-btn').style.backgroundColor = "#49fb35";
+    document.getElementById('translation').style.backgroundColor = "#49fb35";
   } else {
-    cardBack.style.backgroundColor = "red";
-    document.getElementById('is-correct').style.backgroundColor = "red";
-    document.getElementById('is-incorrect').style.backgroundColor = "red";
-    document.getElementById('show-me').style.backgroundColor = "red";
-    document.getElementById('enter-btn').style.backgroundColor = "red";
-    document.getElementById('translation').style.backgroundColor = "red";
+    cardBack.style.backgroundColor = "#e20000";
+    document.getElementById('is-correct').style.backgroundColor = "	#e20000";
+    document.getElementById('is-incorrect').style.backgroundColor = "	#e20000";
+    document.getElementById('show-me').style.backgroundColor = "	#e20000";
+    document.getElementById('enter-btn').style.backgroundColor = "	#e20000";
+    document.getElementById('translation').style.backgroundColor = "	#e20000";
   }
 }
 
