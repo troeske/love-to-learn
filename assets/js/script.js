@@ -6,9 +6,37 @@ var myExerciseBook = []; // global array of objects to store the vocabularies to
  * @returns: prompts the user for their name and updates the greeting on the page
  */ 
 function greetUser() {
-  let name = prompt("What is your name?");
-  if (name != null) {
-    document.getElementById("userName").textContent = "Hey " + name + "! Let's learn!";
+  // Get the user name modal dialog
+  let modal = document.getElementById('nameModal');
+
+  // display the dialog  
+  modal.style.display = "block";
+
+  document.getElementById('userNameInput').focus();
+
+  // When the user clicks on the cancel button, close the modal
+  document.getElementById('cancelName').addEventListener('click', function() {
+    modal.style.display = "none";
+    document.getElementById("userName").textContent = "Mr./Mrs. Incognito";
+  });
+
+  // When the user clicks the submit button, let's capture the input and close the dialog
+  document.getElementById('submitName').addEventListener('click', function() {
+    var userName = document.getElementById('userNameInput').value;
+    if (userName.trim() !== "") {
+      document.getElementById("userName").textContent = userName;
+      modal.style.display = "none";
+    } else {
+      document.getElementById("userName").textContent = "Mr./Mrs. Incognito";
+    }
+  });
+
+  // Optional: close the modal if the user clicks outside of it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+      document.getElementById("userName").textContent = "Mr./Mrs. Incognito";
+    }
   }
 }
 
@@ -195,6 +223,7 @@ document.addEventListener('DOMContentLoaded', function() {
   flipButtonBack.addEventListener('click', function() {
     card.classList.remove('is-flipped');
   });
+
   /* ask for the users name - we are a polite app after all */
   greetUser();
 
