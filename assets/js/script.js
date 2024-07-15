@@ -284,7 +284,6 @@ document.getElementById('is-incorrect').addEventListener('click', function() {
   let incorrect = parseInt(document.getElementById('incorrect').textContent);
   document.getElementById('incorrect').textContent = incorrect + 1;
   visualizeResult(false);
-
 });
 
 let correct = parseInt(document.getElementById('correct').textContent);
@@ -295,12 +294,18 @@ let incorrect = parseInt(document.getElementById('incorrect').textContent);
  * EventListner for the next button
  */
 document.getElementById('next-btn-front').addEventListener('click', nextCard);
-document.getElementById('next-btn-back').addEventListener('click', nextCard);
+document.getElementById('next-btn-back').addEventListener('click', function() {
+  nextCard();
+  document.getElementById('flip-card-back').click(); //flip to the front side
+});
 
 /**
  * EventListner for the previous button
  */
-document.getElementById('prev-btn-back').addEventListener('click', prevCard);
+document.getElementById('prev-btn-back').addEventListener('click', function() {
+  prevCard();
+  document.getElementById('flip-card-back').click(); //flip to the front side
+});
 document.getElementById('prev-btn-front').addEventListener('click', prevCard);
 
 /**
