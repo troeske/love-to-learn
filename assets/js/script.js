@@ -178,8 +178,9 @@ function showTranslation() {
   let i = parseInt(document.getElementById('current-card-back').textContent) - 1;
   let correctTranslation = myExerciseBook[i].l2;
   document.getElementById('translation').value = correctTranslation;
-  document.getElementById('translation').style.color = "blue";
+  // document.getElementById('translation').style.color = "blue";
 }
+
 /**
  * Function to visualize the result of the translation
  * @param {true/false} correctResult 
@@ -218,6 +219,48 @@ function visualizeResultClean() {
   document.getElementById('translation').style.color = "black";
   document.getElementById('translation').value = "";
   document.getElementById('translation').style.backgroundColor = "white";
+
+  // let's show the right card content
+  let i = document.getElementById('current-card-front').textContent - 1;
+  document.getElementById('original').textContent = myExerciseBook[i].l1;
+}
+
+function addCard() {
+  alert("Add card functionality is not implemented yet");
+}
+
+function prepareAddCard() {
+  // set the modus to add card
+  document.getElementById('card').setAttribute('data-modus', 'add');
+  
+  // show input area for new card
+  document.getElementById('original').style.display = 'none';
+  document.getElementById('input-original').style.display = 'block';
+  document.getElementById('input-original').style.textContent = "language 1";
+  document.getElementById('input-original').focus();
+  document.getElementById('show-me').style.display = "none";
+}
+
+function prepareLearnCard() {
+  // find out if we have any cards to learn
+  if (myExerciseBook.length === 0) {
+    alert("Please upload a CSV file with your vocabulary or add your own cards first");
+  } else if (myExerciseBook.length !== 0) {
+    // set the modus to learn card
+    document.getElementById('card').setAttribute('data-modus', 'learn');
+    
+    // show input area for new card
+    document.getElementById('original').style.display = 'block';
+    document.getElementById('input-original').style.display = 'none';
+    document.getElementById('input-original').style.textContent = "language 1";
+    document.getElementById('show-me').style.display = "block";
+
+    // let's show the first word in the list on the learning card on the page
+    document.getElementById('original').textContent = myExerciseBook[0].l1;
+    drawDividerFront();
+  } else {
+    alert("unkonw error - please reload the page");
+  }
 }
 
 /**
@@ -241,11 +284,11 @@ function handleFileSelect(event) {
 
         // let's show the first word in the list on the learning card on the page
         let i = 0; // index of the first word in the list
-        document.getElementById('original').textContent = myExerciseBook[0].l1;
+        document.getElementById('original').textContent = myExerciseBook[i].l1;
         drawDividerFront();
-        document.getElementById('languages').textContent = myExerciseBook[0].languages; 
-        document.getElementById('exercise-book').textContent = myExerciseBook[0].myBook; 
-        document.getElementById('topic').textContent = myExerciseBook[0].topic;
+        document.getElementById('languages').textContent = myExerciseBook[i].languages; 
+        document.getElementById('exercise-book').textContent = myExerciseBook[i].myBook; 
+        document.getElementById('topic').textContent = myExerciseBook[i].topic;
         
         /* let's store the array row in the card header as location. Adding 1 to make it human readable */
         document.getElementById('current-card-front').textContent = i + 1;
@@ -256,6 +299,9 @@ function handleFileSelect(event) {
         /* let's clean the right / wrong counter */
         document.getElementById('correct').textContent = "0"
         document.getElementById('incorrect').textContent = "0"
+         // set the modus to learn card
+        document.getElementById('card').setAttribute('data-modus', 'learn');
+
     };
     reader.readAsText(file);
 }
@@ -281,7 +327,18 @@ document.getElementById('translation').addEventListener('change', drawDividerBac
 /* EventListner for enter and click on submit button for translation text  */
 document.getElementById("translation").addEventListener("keydown", function(event) {
   if (event.key === "Enter") {
-    checkTranslation();
+    let appModus = document.getElementById('card').getAttribute('data-modus');
+    /* let's check if we are in add card modus */
+    if (appModus === "add") {
+      addCard();
+
+    } else if (appModus === "learn") {  
+      checkTranslation();
+
+    } else {
+      alert("function " + appModus + " not implemented yet");
+    } 
+
   } else {
     document.getElementById("translation").placeholder = ""
   }
@@ -292,23 +349,47 @@ document.getElementById('trash-card').addEventListener('click', deleteCurrentCar
 
 
 /* EventListners for the card-back card-nav buttons*/
-document.getElementById('enter-btn').addEventListener('click', checkTranslation);
+document.getElementById('enter-btn').addEventListener('click', function() {
+  let appModus = document.getElementById('card').getAttribute('data-modus');
+  
+  if (appModus === "add") {
+    addCard();
+  } else {  
+    checkTranslation();
+  }
+});
+
 document.getElementById('show-me').addEventListener('click', showTranslation);
 document.getElementById('is-correct').addEventListener('click', function() {
-  let correct = parseInt(document.getElementById('correct').textContent);
-  document.getElementById('correct').textContent = correct + 1;
-  visualizeResult(true);
+  let appModus = document.getElementById('card').getAttribute('data-modus');
+  
+  if (appModus === "add") {
+    addCard();
+  } else if (appModus === "learn") {  
+    let correct = parseInt(document.getElementById('correct').textContent);
+    document.getElementById('correct').textContent = correct + 1;
+    visualizeResult(true);
+  } else {
+    alert("function " + appModus + " not implemented yet");
+  }
 });
 
 document.getElementById('is-incorrect').addEventListener('click', function() {
-  let incorrect = parseInt(document.getElementById('incorrect').textContent);
-  document.getElementById('incorrect').textContent = incorrect + 1;
-  visualizeResult(false);
+  let appModus = document.getElementById('card').getAttribute('data-modus');
+  
+  if (appModus === "add") {
+    // user wants to cancel his add card so let's go back to learn mode
+    prepareLearnCard();
+    document.getElementById('flip-card-back').click(); //flip to the front side
+  } else if (appModus === "learn"){  
+    let incorrect = parseInt(document.getElementById('incorrect').textContent);
+    document.getElementById('incorrect').textContent = incorrect + 1;
+    visualizeResult(false);
+  } else {
+    alert("function " + appModus + " not implemented yet");
+  }
+
 });
-
-let correct = parseInt(document.getElementById('correct').textContent);
-let incorrect = parseInt(document.getElementById('incorrect').textContent);
-
 
 /**
  * EventListner for the next button
@@ -329,6 +410,13 @@ document.getElementById('prev-btn-back').addEventListener('click', function() {
 document.getElementById('prev-btn-front').addEventListener('click', prevCard);
 
 /**
+ * set EventListner to add-card button
+ * change the modus to add a new card by setting the data-modus attribute to "add"
+ * and display the input area for the new card
+ */
+document.getElementById('add-card').addEventListener('click', prepareAddCard);
+
+/**
 * EventListner for the flip card functionality
 */
 document.addEventListener('DOMContentLoaded', function() {
@@ -343,6 +431,16 @@ document.addEventListener('DOMContentLoaded', function() {
   // Add click event listener to the flip button on the front side
   flipButtonFront.addEventListener('click', function() {
     card.classList.add('is-flipped');
+    
+    // let's check what app modus we are in an reconfigure card UI accordingly
+    let appModus = document.getElementById('card').getAttribute('data-modus');
+    if (appModus === "add") {
+      prepareAddCard();
+    } else if (appModus === "learn") {  
+      prepareLearnCard();
+    } else {
+      alert("function " + appModus + " not implemented yet");
+    }
     document.getElementById('translation').focus();
   });
 

@@ -41,13 +41,12 @@
         <br>
         <h2 id="exercise-book">My Book</h2>
         <h2 id="topic">Crime</h2>
-        <h2 id="languages">English/Deutsch</h2>
-        
+        <h2 id="languages">English/Deutsch</h2> 
     </section>
 
     <section class="action-area">
         <div class="card-container">
-            <div class="card">
+            <div class="card" id="card" data-modus="empty"> <!-- set app modus to empty as default -->
                 <div class="card-front">  
                     <!-- navigation through the learning card stack -->
                     <div class="card-header">
@@ -62,6 +61,7 @@
                     
                     <!-- this is the area where the word to learn is shown -->
                     <div class="word">
+                        <input type="text" id="input-original" placeholder="Enter language 1"> 
                         <p id="original"></p>    
                     </div>
                     
@@ -98,7 +98,7 @@
                     
                     <!-- this is the area where the user enters and/or looks up the word to learn -->
                     <div class="word">
-                        <input type="text" id="translation" placeholder="Enter the translation"> 
+                        <input type="text" id="translation" placeholder="Enter language 2"> 
                         <button id="enter-btn" class="card-btn">
                             <i class="fa-solid fa-arrow-turn-down fa-rotate-90"></i>
                         </button>    
@@ -138,24 +138,23 @@
     <section class="bottom-nav">
         <!-- bottom navigation for the learning app  -->
         <div class="nav">
-            <!-- start the learning -->
-            <button class="nav-btn">
-                <i class="fa-solid fa-rocket"></i>
+            <!-- get help / info on how use this app -->
+            <button id="info-btn" class="nav-btn">
+                <i class="fa-solid fa-circle-info"></i>
             </button>
             
             <!-- create new exercise book -->
-            <button class="nav-btn">
-                <i class="fa-solid fa-file-circle-plus"></i>
+            <button id="save-btn" class="nav-btn">
+                <i class="fa-solid fa-file-arrow-down"></i>
             </button>
             
-            <!-- : load exercise book -->
+            <!-- : save exercise book -->
             <button id="csvFileUpload-btn" class="nav-btn">
                 <i class="fa-regular fa-rectangle-list"></i>
             </button>
             
             <!-- Hidden file input -->
             <input type="file" id="csvFileInput" accept=".csv">
-            <!-- <input type="file" id="csvFileInput" accept=".csv" onchange="handleFileSelect(event)" > -->
         </div>
     </section>
 
