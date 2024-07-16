@@ -98,17 +98,12 @@ function nextCard() {
   let i = parseInt(document.getElementById('current-card-front').textContent) - 1;
   let totalCards = parseInt(document.getElementById('total-cards-front').textContent);
   if (i < totalCards - 1) {
-    i++;
-    document.getElementById('original').textContent = myExerciseBook[i].l1;
-    drawDividerFront();
-    document.getElementById('languages').textContent = myExerciseBook[i].languages; 
-    document.getElementById('exercise-book').textContent = myExerciseBook[i].myBook; 
-    document.getElementById('topic').textContent = myExerciseBook[i].topic;
-    document.getElementById('current-card-front').textContent = i + 1;
-    document.getElementById('current-card-back').textContent = i + 1;
-    
     /* let's clean-up the input area for the next card */
     visualizeResultClean();
+
+    // and show the right card content
+    i++;
+    showCardContent(i);
   }
 }
 
@@ -120,17 +115,12 @@ function nextCard() {
 function prevCard() {
   let i = parseInt(document.getElementById('current-card-front').textContent) - 1;
   if (i > 0) {
-    i--;
-    document.getElementById('original').textContent = myExerciseBook[i].l1;
-    drawDividerFront();
-    document.getElementById('languages').textContent = myExerciseBook[i].languages; 
-    document.getElementById('exercise-book').textContent = myExerciseBook[i].myBook; 
-    document.getElementById('topic').textContent = myExerciseBook[i].topic;
-    document.getElementById('current-card-front').textContent = i + 1;
-    document.getElementById('current-card-back').textContent = i + 1;
-
     /* let's clean-up the input area for the next card */
     visualizeResultClean();
+
+    // let's show the right card content
+    i--;
+    showCardContent(i);
   }
 }
 
@@ -178,7 +168,6 @@ function showTranslation() {
   let i = parseInt(document.getElementById('current-card-back').textContent) - 1;
   let correctTranslation = myExerciseBook[i].l2;
   document.getElementById('translation').value = correctTranslation;
-  // document.getElementById('translation').style.color = "blue";
 }
 
 /**
@@ -219,32 +208,66 @@ function visualizeResultClean() {
   document.getElementById('translation').style.color = "black";
   document.getElementById('translation').value = "";
   document.getElementById('translation').style.backgroundColor = "white";
+}
 
-  // let's show the right card content
-  let i = document.getElementById('current-card-front').textContent - 1;
-  document.getElementById('original').textContent = myExerciseBook[i].l1;
+function showCardContent(i) {
+  if (i < myExerciseBook.length) {
+    document.getElementById('original').textContent = myExerciseBook[i].l1;
+    drawDividerFront();
+    document.getElementById('current-card-front').textContent = i+1;
+    document.getElementById('current-card-back').textContent = i+1;
+  } else {
+    document.getElementById('original').textContent = myExerciseBook[i].l1;
+    drawDividerFront();
+    document.getElementById('languages').textContent = myExerciseBook[i].languages; 
+    document.getElementById('exercise-book').textContent = myExerciseBook[i].myBook; 
+    document.getElementById('topic').textContent = myExerciseBook[i].topic;
+    document.getElementById('current-card-front').textContent = i;
+    document.getElementById('current-card-back').textContent = i;
+
+  }
 }
 
 function addCard() {
-  alert("Add card functionality is not implemented yet");
+  // alert("Add card functionality is not implemented yet");
+  let myNewCard = [];
+  myNewCard = {
+    'l1': document.getElementById('input-original').value, 
+    'l2': document.getElementById('translation').value, 
+    'languages': document.getElementById('languages').value,
+    'myBook': document.getElementById('exercise-book').value,
+    'topic': document.getElementById('topic').value};
+
+  myExerciseBook.push(myNewCard);
+  // let's show the card content of what we just added
+  let i = myExerciseBook.length - 1;
+  showCardContent(i);
+  document.getElementById('flip-card-back').click(); //flip to the front side
+
 }
 
 function prepareAddCard() {
-  // set the modus to add card
-  document.getElementById('card').setAttribute('data-modus', 'add');
-  
-  // show input area for new card
-  document.getElementById('original').style.display = 'none';
-  document.getElementById('input-original').style.display = 'block';
-  document.getElementById('input-original').style.textContent = "language 1";
-  document.getElementById('input-original').focus();
-  document.getElementById('show-me').style.display = "none";
+  // find out if the user already has loaded an exercise book
+  if (myExerciseBook.length === 0) {
+    alert("Please upload a CSV file with your vocabulary first");
+    return;
+  } else {
+    // set the modus to add card
+    document.getElementById('card').setAttribute('data-modus', 'add');
+    
+    // show input area for new card
+    document.getElementById('original').style.display = 'none';
+    document.getElementById('input-original').style.display = 'block';
+    document.getElementById('input-original').style.textContent = "language 1";
+    document.getElementById('input-original').focus();
+    document.getElementById('show-me').style.display = "none";
+  }
 }
 
 function prepareLearnCard() {
   // find out if we have any cards to learn
   if (myExerciseBook.length === 0) {
-    alert("Please upload a CSV file with your vocabulary or add your own cards first");
+    alert("Please upload a CSV file with your vocabulary first");
   } else if (myExerciseBook.length !== 0) {
     // set the modus to learn card
     document.getElementById('card').setAttribute('data-modus', 'learn');
@@ -449,6 +472,8 @@ document.addEventListener('DOMContentLoaded', function() {
     card.classList.remove('is-flipped');
     /* let's clean-up the input area for the next card */
     visualizeResultClean();
+    let i = parseInt(document.getElementById('current-card-back').textContent)-1;
+    showCardContent(i);
   });
 
   /* ask for the users name - we are a polite app after all */
