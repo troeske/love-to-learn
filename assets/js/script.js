@@ -240,7 +240,8 @@ function addCard() {
     'l2': document.getElementById('translation').value, 
     'languages': document.getElementById('languages').textContent,
     'myBook': document.getElementById('exercise-book').textContent,
-    'topic': document.getElementById('topic').textContent};
+    'topic': document.getElementById('topic').textContent
+  };
 
   myExerciseBook.push(myNewCard);
 
@@ -255,20 +256,20 @@ function addCard() {
 
 function prepareAddCard() {
   // find out if the user already has loaded an exercise book
-  if (myExerciseBook.length === 0) {
+  /* if (myExerciseBook.length === 0) {
     alert("Please add an Exercise Book (CSV file) with your vocabulary first");
     return;
-  } else {
+  } else { */
     // set the modus to add card
     document.getElementById('card').setAttribute('data-modus', 'add');
     
     // show input area for new card
     document.getElementById('original').style.display = 'none';
     document.getElementById('input-original').style.display = 'block';
-    document.getElementById('input-original').style.textContent = "language 1";
+    document.getElementById('input-original').placeholder = "Enter language 1";
     document.getElementById('input-original').focus();
     document.getElementById('show-me').style.display = "none";
-  }
+ /*  } */
 }
 
 function prepareLearnCard(i) {
@@ -283,6 +284,7 @@ function prepareLearnCard(i) {
     
     // show input area for new card
     document.getElementById('original').style.display = 'block';
+    document.getElementById('input-original').value = "";
     document.getElementById('input-original').style.display = 'none';
     document.getElementById('show-me').style.display = "block";
 
