@@ -77,16 +77,11 @@ function deleteCurrentCard() {
   let i = parseInt(document.getElementById('current-card-front').textContent) - 1;
   let myDeletedCard = myExerciseBook.splice(i, 1);
   
-  /* let's correct the display after deletion  */
-  document.getElementById('current-card-front').textContent = i + 1;
-  document.getElementById('total-cards-front').textContent = myExerciseBook.length;
-  
-  document.getElementById('current-card-back').textContent = i + 1;
-  document.getElementById('total-cards-back').textContent = myExerciseBook.length;
-
-  /* and display the new word */
-  document.getElementById('original').textContent = myExerciseBook[i].l1;
-  drawDividerFront();
+  if (i >= 0 && i < myExerciseBook.length) {
+    showCardContent(i);
+  } else {
+    alert("No more cards in your exercise book");
+  }
 }
 
 /**
@@ -95,15 +90,17 @@ function deleteCurrentCard() {
  * @returns: updates the card header with the current card number
  */
 function nextCard() {
-  let i = parseInt(document.getElementById('current-card-front').textContent) - 1;
+  let i = parseInt(document.getElementById('current-card-front').textContent) - 1; // array index of the current card (-1 of displayed card number)
   let totalCards = parseInt(document.getElementById('total-cards-front').textContent);
-  if (i < totalCards - 1) {
+  if (i <= totalCards && i >=0) {
     /* let's clean-up the input area for the next card */
     visualizeResultClean();
 
-    // and show the right card content
+    // and show the next card content
     i++;
     showCardContent(i);
+  } else {
+    alert("No more cards in your exercise book");
   }
 }
 
@@ -114,13 +111,15 @@ function nextCard() {
  */
 function prevCard() {
   let i = parseInt(document.getElementById('current-card-front').textContent) - 1;
-  if (i > 0) {
+  if (i >= 0) {
     /* let's clean-up the input area for the next card */
     visualizeResultClean();
 
-    // let's show the right card content
-    i--;
+    // let's show the previous card content
+    i--
     showCardContent(i);
+  } else {
+    alert("No more cards in your exercise book");
   }
 }
 
@@ -209,22 +208,27 @@ function visualizeResultClean() {
   document.getElementById('translation').value = "";
   document.getElementById('translation').style.backgroundColor = "white";
 }
-
+/**
+ * Function to show the card content
+ * @param {*} i; index of the array element to show 
+  * @returns: updates the card with the word in the list at index i 
+ */
 function showCardContent(i) {
-  if (i < myExerciseBook.length) {
-    document.getElementById('original').textContent = myExerciseBook[i].l1;
-    drawDividerFront();
-    document.getElementById('current-card-front').textContent = i+1;
-    document.getElementById('current-card-back').textContent = i+1;
+  let totalCards = myExerciseBook.length;
+
+  if (i < 0 || i >= totalCards) {
+    alert("No more cards in your exercise book");
+    return;
   } else {
     document.getElementById('original').textContent = myExerciseBook[i].l1;
     drawDividerFront();
+    document.getElementById('current-card-front').textContent = i + 1;
+    document.getElementById('current-card-back').textContent = i + 1;
+    document.getElementById('total-cards-front').textContent = totalCards;
+    document.getElementById('total-cards-back').textContent = totalCards;
     document.getElementById('languages').textContent = myExerciseBook[i].languages; 
     document.getElementById('exercise-book').textContent = myExerciseBook[i].myBook; 
     document.getElementById('topic').textContent = myExerciseBook[i].topic;
-    document.getElementById('current-card-front').textContent = i;
-    document.getElementById('current-card-back').textContent = i;
-
   }
 }
 
@@ -234,22 +238,25 @@ function addCard() {
   myNewCard = {
     'l1': document.getElementById('input-original').value, 
     'l2': document.getElementById('translation').value, 
-    'languages': document.getElementById('languages').value,
-    'myBook': document.getElementById('exercise-book').value,
-    'topic': document.getElementById('topic').value};
+    'languages': document.getElementById('languages').textContent,
+    'myBook': document.getElementById('exercise-book').textContent,
+    'topic': document.getElementById('topic').textContent};
 
   myExerciseBook.push(myNewCard);
+
+  let i = myExerciseBook.length -1;
+
+  // let's clean the input area for the next card and get back to learning mode
+  prepareLearnCard(i);
   // let's show the card content of what we just added
-  let i = myExerciseBook.length - 1;
   showCardContent(i);
   document.getElementById('flip-card-back').click(); //flip to the front side
-
 }
 
 function prepareAddCard() {
   // find out if the user already has loaded an exercise book
   if (myExerciseBook.length === 0) {
-    alert("Please upload a CSV file with your vocabulary first");
+    alert("Please add an Exercise Book (CSV file) with your vocabulary first");
     return;
   } else {
     // set the modus to add card
@@ -264,25 +271,23 @@ function prepareAddCard() {
   }
 }
 
-function prepareLearnCard() {
-  // find out if we have any cards to learn
-  if (myExerciseBook.length === 0) {
+function prepareLearnCard(i) {
+  let totalCards = myExerciseBook.length;
+
+  if (i < 0 || i >= totalCards) {
     alert("Please upload a CSV file with your vocabulary first");
-  } else if (myExerciseBook.length !== 0) {
+    return;
+  } else {
     // set the modus to learn card
     document.getElementById('card').setAttribute('data-modus', 'learn');
     
     // show input area for new card
     document.getElementById('original').style.display = 'block';
     document.getElementById('input-original').style.display = 'none';
-    document.getElementById('input-original').style.textContent = "language 1";
     document.getElementById('show-me').style.display = "block";
 
-    // let's show the first word in the list on the learning card on the page
-    document.getElementById('original').textContent = myExerciseBook[0].l1;
-    drawDividerFront();
-  } else {
-    alert("unkonw error - please reload the page");
+    // let's show the requested word in the list
+    showCardContent(i);
   }
 }
 
@@ -324,7 +329,6 @@ function handleFileSelect(event) {
         document.getElementById('incorrect').textContent = "0"
          // set the modus to learn card
         document.getElementById('card').setAttribute('data-modus', 'learn');
-
     };
     reader.readAsText(file);
 }
@@ -365,7 +369,21 @@ document.getElementById("translation").addEventListener("keydown", function(even
   } else {
     document.getElementById("translation").placeholder = ""
   }
-})
+});
+
+document.getElementById("input-original").addEventListener("keydown", function(event) {
+  if (event.key === "Enter") {
+    let appModus = document.getElementById('card').getAttribute('data-modus');
+    /* let's check if we are in add card modus */
+    if (appModus === "add") {
+      document.getElementById('flip-card').click(); //flip to the back side
+    } else {
+      alert("function " + appModus + " not implemented yet");
+    } 
+
+  }
+});
+
 
 /* EventListner for the trash button on the front of the card */
 document.getElementById('trash-card').addEventListener('click', deleteCurrentCard);
@@ -401,8 +419,9 @@ document.getElementById('is-incorrect').addEventListener('click', function() {
   let appModus = document.getElementById('card').getAttribute('data-modus');
   
   if (appModus === "add") {
-    // user wants to cancel his add card so let's go back to learn mode
-    prepareLearnCard();
+    // user wants to cancel his add card so let's go back to learn mode with the current card
+    i = parseInt(document.getElementById('current-card-front').textContent) -1;
+    prepareLearnCard(i);
     document.getElementById('flip-card-back').click(); //flip to the front side
   } else if (appModus === "learn"){  
     let incorrect = parseInt(document.getElementById('incorrect').textContent);
@@ -458,9 +477,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // let's check what app modus we are in an reconfigure card UI accordingly
     let appModus = document.getElementById('card').getAttribute('data-modus');
     if (appModus === "add") {
-      prepareAddCard();
+      prepareAddCard(0);
     } else if (appModus === "learn") {  
-      prepareLearnCard();
+      i = parseInt(document.getElementById('current-card-front').textContent) -1;
+      prepareLearnCard(i);
     } else {
       alert("function " + appModus + " not implemented yet");
     }
