@@ -181,7 +181,7 @@ function prevCard() {
   if (i >= 0) {
     /* let's check if the user has edited any data and update array if needed */
     checkToUpdateData();
-    
+
     /* let's clean-up the input area for the next card */
     visualizeResultClean();
 
@@ -306,8 +306,8 @@ function addCard() {
     'l2': document.getElementById('translation').value, 
     'languages': document.getElementById('languages').textContent,
     'myBook': document.getElementById('exercise-book').textContent,
-    'topic': document.getElementById('topic').textContent
-    'author': document.getElementById('userName').textContent //we assume the author is the current user
+    'topic': document.getElementById('topic').textContent,
+    'author': document.getElementById('userName').textContent
   };
 
   myExerciseBook.push(myNewCard);
@@ -356,18 +356,16 @@ function prepareLearnCard(i) {
 
 function checkToUpdateData() {
   let i = parseInt(document.getElementById('current-card-front').textContent) - 1;
-  let original = document.getElementById('original').textContent;
-  let translation = document.getElementById('translation').value;
-  let languages = document.getElementById('languages').textContent;
-  let exerciseBook = document.getElementById('exercise-book').textContent;
-  let topic = document.getElementById('topic').textContent;
+  let languages = document.getElementById('languages').textContent.trim();
+  let exerciseBook = document.getElementById('exercise-book').textContent.trim();
+  let topic = document.getElementById('topic').textContent.trim();
 
-  if (original !== myExerciseBook[i].l1 || translation !== myExerciseBook[i].l2 || languages !== myExerciseBook[i].languages || exerciseBook !== myExerciseBook[i].myBook || topic !== myExerciseBook[i].topic) {
-    myExerciseBook[i].l1 = document.getElementById('input-original').value;
-    myExerciseBook[i].l2 = document.getElementById('translation').value;
-    myExerciseBook[i].languages = document.getElementById('languages').textContent;
-    myExerciseBook[i].myBook = document.getElementById('exercise-book').textContent;
-    myExerciseBook[i].topic = document.getElementById('topic').textContent;
+  if (languages !== myExerciseBook[i].languages || exerciseBook !== myExerciseBook[i].myBook || topic !== myExerciseBook[i].topic) {
+    myExerciseBook[i].l1 = document.getElementById('input-original').value.trim();
+    myExerciseBook[i].l2 = document.getElementById('translation').value.trim();
+    myExerciseBook[i].languages = document.getElementById('languages').textContent.trim();
+    myExerciseBook[i].myBook = document.getElementById('exercise-book').textContent.trim();
+    myExerciseBook[i].topic = document.getElementById('topic').textContent.trim();
   } else {
     return false;
   }
@@ -396,9 +394,9 @@ function handleFileSelect(event) {
         let i = 0; // index of the first word in the list
         document.getElementById('original').textContent = myExerciseBook[i].l1;
         drawDividerFront();
-        document.getElementById('languages').textContent = myExerciseBook[i].languages; 
-        document.getElementById('exercise-book').textContent = myExerciseBook[i].myBook; 
-        document.getElementById('topic').textContent = myExerciseBook[i].topic;
+        document.getElementById('languages').childNodes[0].nodeValue = myExerciseBook[i].languages + ' '; 
+        document.getElementById('exercise-book').childNodes[0].nodeValue = myExerciseBook[i].myBook + ' '; 
+        document.getElementById('topic').childNodes[0].nodeValue = myExerciseBook[i].topic + ' ';
         
         /* let's store the array row in the card header as location. Adding 1 to make it human readable */
         document.getElementById('current-card-front').textContent = i + 1;
