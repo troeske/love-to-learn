@@ -60,32 +60,59 @@ function greetUser() {
  */
 function editH2Content(id) {
   let h2Element = document.getElementById(id);
-  // Assuming the first child node is the text node you want to edit
-  let currentText = h2Element.childNodes[0].nodeValue.trim(); 
+  let currentText = h2Element.childNodes[0].nodeValue.trim();
   let inputField = document.getElementById('input-' + id);
 
-  // Show input field and prefill with current h2 content
   inputField.style.display = 'block';
   inputField.value = currentText;
   inputField.focus();
-  
-  // Hide current h2 element
+
   h2Element.style.visibility = 'hidden';
+
+  // Function to revert back to h2 text
+  function revertToText() {
+    h2Element.childNodes[0].nodeValue = inputField.value + ' ';
+    h2Element.style.visibility = 'visible';
+    inputField.style.display = 'none';
+    // Remove event listeners to avoid memory leaks
+    document.removeEventListener('click', outsideClickListener);
+    document.removeEventListener('keyup', escKeyListener);
+  }
+
+  // Function to revert to original h2 text provided by Copilot
+  function revertToOriginalText() {
+    h2Element.childNodes[0].nodeValue = currentText + ' ';
+    h2Element.style.visibility = 'visible';
+    inputField.style.display = 'none';
+    // Remove event listeners to avoid memory leaks
+    document.removeEventListener('click', outsideClickListener);
+    document.removeEventListener('keyup', escKeyListener);
+  }
 
   // Event listener for keypress event of current input field
   inputField.addEventListener('keypress', function(e) {
     if (e.key === 'Enter') {
-      revertToText(); 
+      revertToText();
     }
   });
 
-  // Function to revert back to h2 text
-  function revertToText() {
-    // Update only the text node, preserving the button: fix provided by Copilot
-    h2Element.childNodes[0].nodeValue = inputField.value + ' '; 
-    h2Element.style.visibility = 'visible'; 
-    inputField.style.display = 'none'; 
+  // Event listener for clicks outside the input field provided by Copilot
+  function outsideClickListener(event) {
+    if (!inputField.contains(event.target) && !h2Element.contains(event.target)) {
+      revertToText();
+    }
   }
+
+  // Event listener for Esc key provided by Copilot
+  function escKeyListener(event) {
+    if (event.key === 'Escape') {
+      revertToOriginalText();
+    }
+  }
+
+  // Add event listeners
+  document.addEventListener('click', outsideClickListener);
+  document.addEventListener('keyup', escKeyListener);
 }
 
 
