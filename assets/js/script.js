@@ -284,7 +284,7 @@ function visualizeResultClean() {
   * @returns: updates the card with the word in the list at index i 
  */
 function showCardContent(i) {
-  let totalCards = myExerciseBook.length;
+  let totalCards = myExerciseBook.length-1;
 
   if (i < 0 || i >= totalCards) {
     alert("No more cards in your exercise book");
@@ -302,12 +302,12 @@ function showCardContent(i) {
 function addCard() {
   let myNewCard = [];
   myNewCard = {
-    'l1': document.getElementById('input-original').value, 
-    'l2': document.getElementById('translation').value, 
-    'languages': document.getElementById('languages').textContent,
-    'myBook': document.getElementById('exercise-book').textContent,
-    'topic': document.getElementById('topic').textContent,
-    'author': document.getElementById('userName').textContent
+    'l1': document.getElementById('input-original').value.trim(), 
+    'l2': document.getElementById('translation').value.trim(), 
+    'languages': document.getElementById('languages').textContent.trim(),
+    'myBook': document.getElementById('exercise-book').textContent.trim(),
+    'topic': document.getElementById('topic').textContent.trim(),
+    'author': document.getElementById('userName').textContent.trim()
   };
 
   myExerciseBook.push(myNewCard);
@@ -334,7 +334,7 @@ function prepareAddCard() {
 }
 
 function prepareLearnCard(i) {
-  let totalCards = myExerciseBook.length;
+  let totalCards = myExerciseBook.length -1;
 
   if (i < 0 || i >= totalCards) {
     alert("Please upload a CSV file with your vocabulary first");
