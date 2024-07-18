@@ -39,9 +39,21 @@
         <br>    
         <br>
         <br>
-        <h2 id="exercise-book">My Book</h2>
-        <h2 id="topic">Crime</h2>
-        <h2 id="languages">English/Deutsch</h2> 
+        <!-- changeability of heading  -->
+        <div class="editable-h2s">
+            <input type="text" id="input-exercise-book" class="input-hidden"> 
+            <h2 id="exercise-book">My Book <button class="edit-btn" onclick="editH2Content('exercise-book')"><i class="fa-solid fa-pen-to-square"></i></button>
+            </h2>
+        </div>
+        <div class="editable-h2s">
+            <input type="text" id="input-topic" class="input-hidden"> 
+            <h2 id="topic">Crime <button class="edit-btn" onclick="editH2Content('topic')"><i class="fa-solid fa-pen-to-square"></i></button></h2>
+        </div>
+        <div class="editable-h2s">
+            <input type="text" id="input-languages" class="input-hidden"> 
+            <h2 id="languages">English/Deutsch <button class="edit-btn" onclick="editH2Content('languages')"><i class="fa-solid fa-pen-to-square"></i></button>
+            </h2>
+        </div>
     </section>
 
     <section class="action-area">

@@ -52,6 +52,51 @@ function greetUser() {
 }
 
 /**
+ * Function to enable editing of the content of the h2 headings
+ * @param {id} of the h2 element to edit
+ * @returns: replaces the h2 element with an input field to edit the content
+ * @returns: updates the h2 element with the new content when the user clicks away from the input field
+ * based on suggestion from Copilot
+ */
+function editH2Content(id) {
+  let h2Element = document.getElementById(id);
+  // Assuming the first child node is the text node you want to edit
+  let currentText = h2Element.childNodes[0].nodeValue.trim(); 
+  let inputField = document.getElementById('input-' + id);
+
+  // Show input field and prefill with current h2 content
+  inputField.style.display = 'block';
+  inputField.value = currentText;
+  inputField.focus();
+  
+  // Hide current h2 element
+  h2Element.style.visibility = 'hidden';
+
+  // Event listener for keypress event of current input field
+  inputField.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      revertToText(); 
+    }
+  });
+
+  // Function to revert back to h2 text
+  function revertToText() {
+    // Update only the text node, preserving the button: fix provided by Copilot
+    h2Element.childNodes[0].nodeValue = inputField.value + ' '; 
+    h2Element.style.visibility = 'visible'; 
+    inputField.style.display = 'none'; 
+  }
+}
+
+
+
+/*   // Event listener for blur event
+  inputField.addEventListener('blur', function() {
+      revertToText();
+  });
+ */
+
+/**
  * Function to handle CSV to Array conversion
  * @param {csvText} from FileReader 
  * @returns array of objects with headers as keys
