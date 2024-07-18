@@ -115,14 +115,6 @@ function editH2Content(id) {
   document.addEventListener('keyup', escKeyListener);
 }
 
-
-
-/*   // Event listener for blur event
-  inputField.addEventListener('blur', function() {
-      revertToText();
-  });
- */
-
 /**
  * Function to handle CSV to Array conversion
  * @param {csvText} from FileReader 
@@ -298,9 +290,9 @@ function showCardContent(i) {
     document.getElementById('current-card-back').textContent = i + 1;
     document.getElementById('total-cards-front').textContent = totalCards;
     document.getElementById('total-cards-back').textContent = totalCards;
-    document.getElementById('languages').textContent = myExerciseBook[i].languages; 
+    /* document.getElementById('languages').textContent = myExerciseBook[i].languages; 
     document.getElementById('exercise-book').textContent = myExerciseBook[i].myBook; 
-    document.getElementById('topic').textContent = myExerciseBook[i].topic;
+    document.getElementById('topic').textContent = myExerciseBook[i].topic; */
   }
 }
 
