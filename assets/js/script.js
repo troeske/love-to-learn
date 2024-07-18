@@ -157,6 +157,9 @@ function nextCard() {
   let i = parseInt(document.getElementById('current-card-front').textContent) - 1; // array index of the current card (-1 of displayed card number)
   let totalCards = parseInt(document.getElementById('total-cards-front').textContent);
   if (i <= totalCards && i >=0) {
+    /* let's check if the user has edited any data and update array if needed */
+    checkToUpdateData();
+
     /* let's clean-up the input area for the next card */
     visualizeResultClean();
 
@@ -176,6 +179,9 @@ function nextCard() {
 function prevCard() {
   let i = parseInt(document.getElementById('current-card-front').textContent) - 1;
   if (i >= 0) {
+    /* let's check if the user has edited any data and update array if needed */
+    checkToUpdateData();
+    
     /* let's clean-up the input area for the next card */
     visualizeResultClean();
 
@@ -290,14 +296,10 @@ function showCardContent(i) {
     document.getElementById('current-card-back').textContent = i + 1;
     document.getElementById('total-cards-front').textContent = totalCards;
     document.getElementById('total-cards-back').textContent = totalCards;
-    /* document.getElementById('languages').textContent = myExerciseBook[i].languages; 
-    document.getElementById('exercise-book').textContent = myExerciseBook[i].myBook; 
-    document.getElementById('topic').textContent = myExerciseBook[i].topic; */
   }
 }
 
 function addCard() {
-  // alert("Add card functionality is not implemented yet");
   let myNewCard = [];
   myNewCard = {
     'l1': document.getElementById('input-original').value, 
@@ -305,6 +307,7 @@ function addCard() {
     'languages': document.getElementById('languages').textContent,
     'myBook': document.getElementById('exercise-book').textContent,
     'topic': document.getElementById('topic').textContent
+    'author': document.getElementById('userName').textContent //we assume the author is the current user
   };
 
   myExerciseBook.push(myNewCard);
@@ -320,20 +323,14 @@ function addCard() {
 
 function prepareAddCard() {
   // find out if the user already has loaded an exercise book
-  /* if (myExerciseBook.length === 0) {
-    alert("Please add an Exercise Book (CSV file) with your vocabulary first");
-    return;
-  } else { */
-    // set the modus to add card
-    document.getElementById('card').setAttribute('data-modus', 'add');
-    
-    // show input area for new card
-    document.getElementById('original').style.display = 'none';
-    document.getElementById('input-original').style.display = 'block';
-    document.getElementById('input-original').placeholder = "Enter language 1";
-    document.getElementById('input-original').focus();
-    document.getElementById('show-me').style.display = "none";
- /*  } */
+  document.getElementById('card').setAttribute('data-modus', 'add');
+  
+  // show input area for new card
+  document.getElementById('original').style.display = 'none';
+  document.getElementById('input-original').style.display = 'block';
+  document.getElementById('input-original').placeholder = "Enter language 1";
+  document.getElementById('input-original').focus();
+  document.getElementById('show-me').style.display = "none";
 }
 
 function prepareLearnCard(i) {
@@ -354,6 +351,25 @@ function prepareLearnCard(i) {
 
     // let's show the requested word in the list
     showCardContent(i);
+  }
+}
+
+function checkToUpdateData() {
+  let i = parseInt(document.getElementById('current-card-front').textContent) - 1;
+  let original = document.getElementById('original').textContent;
+  let translation = document.getElementById('translation').value;
+  let languages = document.getElementById('languages').textContent;
+  let exerciseBook = document.getElementById('exercise-book').textContent;
+  let topic = document.getElementById('topic').textContent;
+
+  if (original !== myExerciseBook[i].l1 || translation !== myExerciseBook[i].l2 || languages !== myExerciseBook[i].languages || exerciseBook !== myExerciseBook[i].myBook || topic !== myExerciseBook[i].topic) {
+    myExerciseBook[i].l1 = document.getElementById('input-original').value;
+    myExerciseBook[i].l2 = document.getElementById('translation').value;
+    myExerciseBook[i].languages = document.getElementById('languages').textContent;
+    myExerciseBook[i].myBook = document.getElementById('exercise-book').textContent;
+    myExerciseBook[i].topic = document.getElementById('topic').textContent;
+  } else {
+    return false;
   }
 }
 
