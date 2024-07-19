@@ -417,9 +417,16 @@ function handleFileSelect(event) {
   reader.readAsText(file);
 }
 
+/**
+ * 
+ * @returns the array of objects as a CSV file
+ * draft of the function provided by Copilot with modifications by myself
+ */
 function convertArrayToCSV() {
+  let totalCards = myExerciseBook.length;
+
   // Check if the array is not empty and has items
-  if (myExerciseBook.length === 0) {
+  if (totalCards === 0) {
     alert('Your Exercise Book is empty!');
     return;
   }
@@ -428,7 +435,7 @@ function convertArrayToCSV() {
   let headers = ['l1', 'l2', 'languages', 'myBook', 'topic', 'author'];
   // Convert array of objects to CSV string
   let csvRows = myExerciseBook.map(obj => {
-    return headers.map(fieldName => `"${obj[fieldName]?.replace(/"/g, '""') || ''}"`).join(',');
+    return headers.map(fieldName => `${obj[fieldName]?.replace(/"/g, '""') || ''}`).join(',');
   });
   csvRows.unshift(headers.join(',')); // Add headers at the beginning
   const csvString = csvRows.join('\r\n');
@@ -438,7 +445,9 @@ function convertArrayToCSV() {
     type: 'text/csv;charset=utf-8;'
   });
 
-  let filename = 'myExerciseBook.csv';
+  // let's use the last entry in the myBook field as the filename replacing spaces with underscores
+  let myBookName = myExerciseBook[totalCards-1].myBook;
+  let filename = replaceSpacesWithUnderscores(myBookName) + '.csv';
   
   // Create a temporary download link
   const tempLink = document.createElement('a');
@@ -453,6 +462,15 @@ function convertArrayToCSV() {
   document.body.removeChild(tempLink);
 }
 
+/**
+ * 
+ * @param {*} str 
+ * @returns the string with spaces replaced by underscores
+ * function provided by Copilot
+ */
+function replaceSpacesWithUnderscores(str) {
+  return str.replace(/ /g, '_');
+}
 
 // Event listeners
 
