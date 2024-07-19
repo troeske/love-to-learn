@@ -4,7 +4,7 @@ var myExerciseBook = []; // global array of objects to store the vocabularies to
 /**
  * Function to greet the user, called when page is loaded 
  * @returns: prompts the user for their name and updates the greeting on the page
- */ 
+ */
 function greetUser() {
   // Get the user name modal dialog
   let modal = document.getElementById('nameModal');
@@ -13,7 +13,7 @@ function greetUser() {
   modal.style.display = "block";
 
   document.getElementById('userNameInput').focus();
-  document.getElementById("userNameInput").addEventListener("keydown", function(event) {
+  document.getElementById("userNameInput").addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
       var userName = document.getElementById('userNameInput').value;
       if (userName.trim() !== "") {
@@ -26,13 +26,13 @@ function greetUser() {
   })
 
   // When the user clicks on the cancel button, close the modal
-  document.getElementById('cancelName').addEventListener('click', function() {
+  document.getElementById('cancelName').addEventListener('click', function () {
     modal.style.display = "none";
     document.getElementById("userName").textContent = "Mr./Mrs. Incognito";
   });
 
   // When the user clicks the submit button, let's capture the input and close the dialog
-  document.getElementById('submitName').addEventListener('click', function() {
+  document.getElementById('submitName').addEventListener('click', function () {
     var userName = document.getElementById('userNameInput').value;
     if (userName.trim() !== "") {
       document.getElementById("userName").textContent = userName;
@@ -43,7 +43,7 @@ function greetUser() {
   });
 
   // Optional: close the modal if the user clicks outside of it
-  window.onclick = function(event) {
+  window.onclick = function (event) {
     if (event.target == modal) {
       modal.style.display = "none";
       document.getElementById("userName").textContent = "Mr./Mrs. Incognito";
@@ -90,7 +90,7 @@ function editH2Content(id) {
   }
 
   // Event listener for keypress event of current input field
-  inputField.addEventListener('keypress', function(e) {
+  inputField.addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
       revertToText();
     }
@@ -121,26 +121,26 @@ function editH2Content(id) {
  * @returns array of objects with headers as keys
  */
 function csvToArray(csvText) {
-   //basic structure provided by Github Copilot
-    const csvNEWLINE = '\n';
-    const csvDELIMITER = ',';
-    
-    let lines = csvText.split(csvNEWLINE);
-    let headers = lines[0].split(csvDELIMITER).map(header => header.trim());
+  //basic structure provided by Github Copilot
+  const csvNEWLINE = '\n';
+  const csvDELIMITER = ',';
 
-    return lines.slice(1).map(line => {
-        let values = line.split(csvDELIMITER).map(value => value.trim());
-        return headers.reduce((acc, header, index) => {
-            acc[header] = values[index];
-            return acc;
-        }, {});
-    });
+  let lines = csvText.split(csvNEWLINE);
+  let headers = lines[0].split(csvDELIMITER).map(header => header.trim());
+
+  return lines.slice(1).map(line => {
+    let values = line.split(csvDELIMITER).map(value => value.trim());
+    return headers.reduce((acc, header, index) => {
+      acc[header] = values[index];
+      return acc;
+    }, {});
+  });
 }
 
 function deleteCurrentCard() {
   let i = parseInt(document.getElementById('current-card-front').textContent) - 1;
   let myDeletedCard = myExerciseBook.splice(i, 1);
-  
+
   if (i >= 0 && i < myExerciseBook.length) {
     showCardContent(i);
   } else {
@@ -156,7 +156,7 @@ function deleteCurrentCard() {
 function nextCard() {
   let i = parseInt(document.getElementById('current-card-front').textContent) - 1; // array index of the current card (-1 of displayed card number)
   let totalCards = parseInt(document.getElementById('total-cards-front').textContent);
-  if (i <= totalCards && i >=0) {
+  if (i <= totalCards && i >= 0) {
     /* let's check if the user has edited any data and update array if needed */
     checkToUpdateData();
 
@@ -194,21 +194,25 @@ function prevCard() {
 }
 
 function drawDividerFront() {
-  let wordL1 = document.querySelector('#original'); 
-  let dividerL1 = document.querySelector('#divider-front'); 
+  let wordL1 = document.querySelector('#original');
+  let dividerL1 = document.querySelector('#divider-front');
 
   if (wordL1 && dividerL1) {
-    let width = wordL1.offsetWidth; 
+    let width = wordL1.offsetWidth;
     dividerL1.style.width = width + 'px'; // Set the width of the .hand-drawn-divider for original to match
   }
 };
 
+/**
+ * Function to draw the line under the l2 word dynamically based on the length of the word
+ * funciton provided by Copilot
+ */
 function drawDividerBack() {
-  let wordL2 = document.querySelector('#translation'); 
-  let dividerL2 = document.querySelector('#divider-back'); 
+  let wordL2 = document.querySelector('#translation');
+  let dividerL2 = document.querySelector('#divider-back');
 
   if (wordL2 && dividerL2) {
-    let width = wordL2.offsetWidth; 
+    let width = wordL2.offsetWidth;
     dividerL2.style.width = width + 'px'; // Set the width of the .hand-drawn-divider for transaltion to match
   }
 };
@@ -225,10 +229,10 @@ function checkTranslation() {
   let incorrect = parseInt(document.getElementById('incorrect').textContent);
 
   if (translation.trim().toLowerCase() === correctTranslation.trim().toLowerCase()) {
-    document.getElementById('correct').textContent = correct+1;
+    document.getElementById('correct').textContent = correct + 1;
     visualizeResult(true);
   } else {
-    document.getElementById('incorrect').textContent = incorrect+1;
+    document.getElementById('incorrect').textContent = incorrect + 1;
     visualizeResult(false);
   }
 }
@@ -278,13 +282,68 @@ function visualizeResultClean() {
   document.getElementById('translation').value = "";
   document.getElementById('translation').style.backgroundColor = "white";
 }
+
+function addCard() {
+  let myNewCard = [];
+  myNewCard = {
+    'l1': document.getElementById('input-original').value.trim(),
+    'l2': document.getElementById('translation').value.trim(),
+    'languages': document.getElementById('languages').textContent.trim(),
+    'myBook': document.getElementById('exercise-book').textContent.trim(),
+    'topic': document.getElementById('topic').textContent.trim(),
+    'author': document.getElementById('userName').textContent.trim()
+  };
+
+  myExerciseBook.push(myNewCard);
+
+  let i = myExerciseBook.length - 1;
+
+  // let's clean the input area and show the last card just added and get back to learning mode
+  prepareLearnCard(i);
+  // let's show the card content of what we just added
+  /*   showCardContent(i); */
+  document.getElementById('flip-card-back').click(); //flip to the front side
+}
+
+function prepareAddCard() {
+  // find out if the user already has loaded an exercise book
+  document.getElementById('card').setAttribute('data-modus', 'add');
+
+  // show input area for new card
+  document.getElementById('original').style.display = 'none';
+  document.getElementById('input-original').style.display = 'block';
+  document.getElementById('input-original').placeholder = "Enter language 1";
+  document.getElementById('input-original').focus();
+  document.getElementById('show-me').style.display = "none";
+}
+
+function prepareLearnCard(i) {
+  let totalCards = myExerciseBook.length;
+
+  if (i < 0 || i >= totalCards) {
+    alert("something is wrong with the card index");
+  } else {
+    // set the modus to learn card
+    document.getElementById('card').setAttribute('data-modus', 'learn');
+
+    // show input area for new card
+    document.getElementById('original').style.display = 'block';
+    document.getElementById('input-original').value = "";
+    document.getElementById('input-original').style.display = 'none';
+    document.getElementById('show-me').style.display = "block";
+
+    // let's show the requested word in the list
+    showCardContent(i);
+  }
+}
+
 /**
  * Function to show the card content
  * @param {*} i; index of the array element to show 
-  * @returns: updates the card with the word in the list at index i 
+ * @returns: updates the card with the word in the list at index i 
  */
 function showCardContent(i) {
-  let totalCards = myExerciseBook.length-1;
+  let totalCards = myExerciseBook.length;
 
   if (i < 0 || i >= totalCards) {
     alert("No more cards in your exercise book");
@@ -296,61 +355,6 @@ function showCardContent(i) {
     document.getElementById('current-card-back').textContent = i + 1;
     document.getElementById('total-cards-front').textContent = totalCards;
     document.getElementById('total-cards-back').textContent = totalCards;
-  }
-}
-
-function addCard() {
-  let myNewCard = [];
-  myNewCard = {
-    'l1': document.getElementById('input-original').value.trim(), 
-    'l2': document.getElementById('translation').value.trim(), 
-    'languages': document.getElementById('languages').textContent.trim(),
-    'myBook': document.getElementById('exercise-book').textContent.trim(),
-    'topic': document.getElementById('topic').textContent.trim(),
-    'author': document.getElementById('userName').textContent.trim()
-  };
-
-  myExerciseBook.push(myNewCard);
-
-  let i = myExerciseBook.length -1;
-
-  // let's clean the input area for the next card and get back to learning mode
-  prepareLearnCard(i);
-  // let's show the card content of what we just added
-  showCardContent(i);
-  document.getElementById('flip-card-back').click(); //flip to the front side
-}
-
-function prepareAddCard() {
-  // find out if the user already has loaded an exercise book
-  document.getElementById('card').setAttribute('data-modus', 'add');
-  
-  // show input area for new card
-  document.getElementById('original').style.display = 'none';
-  document.getElementById('input-original').style.display = 'block';
-  document.getElementById('input-original').placeholder = "Enter language 1";
-  document.getElementById('input-original').focus();
-  document.getElementById('show-me').style.display = "none";
-}
-
-function prepareLearnCard(i) {
-  let totalCards = myExerciseBook.length -1;
-
-  if (i < 0 || i >= totalCards) {
-    alert("Please upload a CSV file with your vocabulary first");
-    return;
-  } else {
-    // set the modus to learn card
-    document.getElementById('card').setAttribute('data-modus', 'learn');
-    
-    // show input area for new card
-    document.getElementById('original').style.display = 'block';
-    document.getElementById('input-original').value = "";
-    document.getElementById('input-original').style.display = 'none';
-    document.getElementById('show-me').style.display = "block";
-
-    // let's show the requested word in the list
-    showCardContent(i);
   }
 }
 
@@ -378,79 +382,116 @@ function checkToUpdateData() {
  * l1, l2, languages, exercise-book, topic, author  
  */
 function handleFileSelect(event) {
-    //basic structure provided by Copilot
-    let file = event.target.files[0];
-    
-    if (!file) {
-        return;
-    }
+  //basic structure provided by Copilot
+  let file = event.target.files[0];
 
-    let reader = new FileReader();
-    reader.onload = function(e) {
-        let text = e.target.result;
-        myExerciseBook = csvToArray(text);
+  if (!file) {
+    return;
+  }
 
-        // let's show the first word in the list on the learning card on the page
-        let i = 0; // index of the first word in the list
-        document.getElementById('original').textContent = myExerciseBook[i].l1;
-        drawDividerFront();
-        document.getElementById('languages').childNodes[0].nodeValue = myExerciseBook[i].languages + ' '; 
-        document.getElementById('exercise-book').childNodes[0].nodeValue = myExerciseBook[i].myBook + ' '; 
-        document.getElementById('topic').childNodes[0].nodeValue = myExerciseBook[i].topic + ' ';
-        
-        /* let's store the array row in the card header as location. Adding 1 to make it human readable */
-        document.getElementById('current-card-front').textContent = i + 1;
-        document.getElementById('total-cards-front').textContent = myExerciseBook.length;
-        document.getElementById('current-card-back').textContent = i + 1;
-        document.getElementById('total-cards-back').textContent = myExerciseBook.length;
+  let reader = new FileReader();
+  reader.onload = function (e) {
+    let text = e.target.result;
+    myExerciseBook = csvToArray(text);
 
-        /* let's clean the right / wrong counter */
-        document.getElementById('correct').textContent = "0"
-        document.getElementById('incorrect').textContent = "0"
-         // set the modus to learn card
-        document.getElementById('card').setAttribute('data-modus', 'learn');
-    };
-    reader.readAsText(file);
+    // let's show the first word in the list on the learning card on the page
+    let i = 0; // index of the first word in the list
+    document.getElementById('original').textContent = myExerciseBook[i].l1;
+    drawDividerFront();
+    document.getElementById('languages').childNodes[0].nodeValue = myExerciseBook[i].languages + ' ';
+    document.getElementById('exercise-book').childNodes[0].nodeValue = myExerciseBook[i].myBook + ' ';
+    document.getElementById('topic').childNodes[0].nodeValue = myExerciseBook[i].topic + ' ';
+
+    /* let's store the array row in the card header as location. Adding 1 to make it human readable */
+    document.getElementById('current-card-front').textContent = i + 1;
+    document.getElementById('total-cards-front').textContent = myExerciseBook.length;
+    document.getElementById('current-card-back').textContent = i + 1;
+    document.getElementById('total-cards-back').textContent = myExerciseBook.length;
+
+    /* let's clean the right / wrong counter */
+    document.getElementById('correct').textContent = "0"
+    document.getElementById('incorrect').textContent = "0"
+    // set the modus to learn card
+    document.getElementById('card').setAttribute('data-modus', 'learn');
+  };
+  reader.readAsText(file);
 }
+
+function convertArrayToCSV() {
+  // Check if the array is not empty and has items
+  if (myExerciseBook.length === 0) {
+    alert('Your Exercise Book is empty!');
+    return;
+  }
+
+  // Define CSV headers based on the object keys
+  let headers = ['l1', 'l2', 'languages', 'myBook', 'topic', 'author'];
+  // Convert array of objects to CSV string
+  let csvRows = myExerciseBook.map(obj => {
+    return headers.map(fieldName => `"${obj[fieldName]?.replace(/"/g, '""') || ''}"`).join(',');
+  });
+  csvRows.unshift(headers.join(',')); // Add headers at the beginning
+  const csvString = csvRows.join('\r\n');
+
+  // Create a Blob with the CSV data
+  const blob = new Blob([csvString], {
+    type: 'text/csv;charset=utf-8;'
+  });
+
+  let filename = 'myExerciseBook.csv';
+  
+  // Create a temporary download link
+  const tempLink = document.createElement('a');
+  tempLink.href = URL.createObjectURL(blob);
+  tempLink.setAttribute('download', filename);
+  document.body.appendChild(tempLink);
+
+  // Trigger the download by simulating a click on the link
+  tempLink.click();
+
+  // Clean up by removing the temporary link
+  document.body.removeChild(tempLink);
+}
+
 
 // Event listeners
 
 /**
  * EventListner for the CSV file upload button
  */
-document.getElementById('csvFileUpload-btn').addEventListener('click', function() {
-    document.getElementById('csvFileInput').click();
+document.getElementById('csvFileUpload-btn').addEventListener('click', function () {
+  document.getElementById('csvFileInput').click();
 });
 
 document.getElementById('csvFileInput').addEventListener('change', handleFileSelect);
 
 /**
  * EventListner to draw the line under the l1 word dynamically based on the length of the word 
- */ 
+ */
 document.getElementById('original').addEventListener('change', drawDividerFront);
 document.getElementById('translation').addEventListener('change', drawDividerBack);
 
 /* EventListner for enter and click on submit button for translation text  */
-document.getElementById("translation").addEventListener("keydown", function(event) {
+document.getElementById("translation").addEventListener("keydown", function (event) {
   if (event.key === "Enter") {
     let appModus = document.getElementById('card').getAttribute('data-modus');
     /* let's check if we are in add card modus */
     if (appModus === "add") {
       addCard();
 
-    } else if (appModus === "learn") {  
+    } else if (appModus === "learn") {
       checkTranslation();
 
     } else {
       alert("function " + appModus + " not implemented yet");
-    } 
+    }
 
   } else {
     document.getElementById("translation").placeholder = ""
   }
 });
 
-document.getElementById("input-original").addEventListener("keydown", function(event) {
+document.getElementById("input-original").addEventListener("keydown", function (event) {
   if (event.key === "Enter") {
     let appModus = document.getElementById('card').getAttribute('data-modus');
     /* let's check if we are in add card modus */
@@ -458,7 +499,7 @@ document.getElementById("input-original").addEventListener("keydown", function(e
       document.getElementById('flip-card').click(); //flip to the back side
     } else {
       alert("function " + appModus + " not implemented yet");
-    } 
+    }
 
   }
 });
@@ -469,23 +510,23 @@ document.getElementById('trash-card').addEventListener('click', deleteCurrentCar
 
 
 /* EventListners for the card-back card-nav buttons*/
-document.getElementById('enter-btn').addEventListener('click', function() {
+document.getElementById('enter-btn').addEventListener('click', function () {
   let appModus = document.getElementById('card').getAttribute('data-modus');
-  
+
   if (appModus === "add") {
     addCard();
-  } else {  
+  } else {
     checkTranslation();
   }
 });
 
 document.getElementById('show-me').addEventListener('click', showTranslation);
-document.getElementById('is-correct').addEventListener('click', function() {
+document.getElementById('is-correct').addEventListener('click', function () {
   let appModus = document.getElementById('card').getAttribute('data-modus');
-  
+
   if (appModus === "add") {
     addCard();
-  } else if (appModus === "learn") {  
+  } else if (appModus === "learn") {
     let correct = parseInt(document.getElementById('correct').textContent);
     document.getElementById('correct').textContent = correct + 1;
     visualizeResult(true);
@@ -494,15 +535,15 @@ document.getElementById('is-correct').addEventListener('click', function() {
   }
 });
 
-document.getElementById('is-incorrect').addEventListener('click', function() {
+document.getElementById('is-incorrect').addEventListener('click', function () {
   let appModus = document.getElementById('card').getAttribute('data-modus');
-  
+
   if (appModus === "add") {
     // user wants to cancel his add card so let's go back to learn mode with the current card
-    i = parseInt(document.getElementById('current-card-front').textContent) -1;
+    i = parseInt(document.getElementById('current-card-front').textContent) - 1;
     prepareLearnCard(i);
     document.getElementById('flip-card-back').click(); //flip to the front side
-  } else if (appModus === "learn"){  
+  } else if (appModus === "learn") {
     let incorrect = parseInt(document.getElementById('incorrect').textContent);
     document.getElementById('incorrect').textContent = incorrect + 1;
     visualizeResult(false);
@@ -516,7 +557,7 @@ document.getElementById('is-incorrect').addEventListener('click', function() {
  * EventListner for the next button
  */
 document.getElementById('next-btn-front').addEventListener('click', nextCard);
-document.getElementById('next-btn-back').addEventListener('click', function() {
+document.getElementById('next-btn-back').addEventListener('click', function () {
   nextCard();
   document.getElementById('flip-card-back').click(); //flip to the front side
 });
@@ -524,7 +565,7 @@ document.getElementById('next-btn-back').addEventListener('click', function() {
 /**
  * EventListner for the previous button
  */
-document.getElementById('prev-btn-back').addEventListener('click', function() {
+document.getElementById('prev-btn-back').addEventListener('click', function () {
   prevCard();
   document.getElementById('flip-card-back').click(); //flip to the front side
 });
@@ -538,11 +579,11 @@ document.getElementById('prev-btn-front').addEventListener('click', prevCard);
 document.getElementById('add-card').addEventListener('click', prepareAddCard);
 
 /**
-* EventListner for the flip card functionality
-*/
-document.addEventListener('DOMContentLoaded', function() {
+ * EventListner for the flip card functionality
+ */
+document.addEventListener('DOMContentLoaded', function () {
   /* Flip card functionality provided by Copilot */
-  
+
   // Select both flip buttons
   var flipButtonFront = document.querySelector('#flip-card');
   var flipButtonBack = document.querySelector('#flip-card-back');
@@ -550,15 +591,15 @@ document.addEventListener('DOMContentLoaded', function() {
   var card = document.querySelector('.card');
 
   // Add click event listener to the flip button on the front side
-  flipButtonFront.addEventListener('click', function() {
+  flipButtonFront.addEventListener('click', function () {
     card.classList.add('is-flipped');
-    
+
     // let's check what app modus we are in an reconfigure card UI accordingly
     let appModus = document.getElementById('card').getAttribute('data-modus');
     if (appModus === "add") {
       prepareAddCard(0);
-    } else if (appModus === "learn") {  
-      i = parseInt(document.getElementById('current-card-front').textContent) -1;
+    } else if (appModus === "learn") {
+      i = parseInt(document.getElementById('current-card-front').textContent) - 1;
       prepareLearnCard(i);
     } else {
       //alert("function " + appModus + " not implemented yet");
@@ -567,11 +608,11 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // Add click event listener to the flip button on the back side
-  flipButtonBack.addEventListener('click', function() {
+  flipButtonBack.addEventListener('click', function () {
     card.classList.remove('is-flipped');
     /* let's clean-up the input area for the next card */
     visualizeResultClean();
-    let i = parseInt(document.getElementById('current-card-back').textContent)-1;
+    let i = parseInt(document.getElementById('current-card-back').textContent) - 1;
     showCardContent(i);
   });
 
@@ -584,13 +625,13 @@ document.addEventListener('DOMContentLoaded', function() {
  * function to show/hide help text for the buttons on the page when the info button is clicked
  * draft provided by Copilot needed a lot of adaptions though
  */
-  document.getElementById('info-btn').addEventListener('click', function() {
-      let helpTexts = document.querySelectorAll('.help-text');
-      helpTexts.forEach(text => {
-          if (text.classList.contains('visible')) {
-              text.classList.remove('visible');
-          } else /* if (text.getAttribute('data-for') === 'info-btn') */ {
-              text.classList.add('visible');
-          }
-      });
+document.getElementById('info-btn').addEventListener('click', function () {
+  let helpTexts = document.querySelectorAll('.help-text');
+  helpTexts.forEach(text => {
+    if (text.classList.contains('visible')) {
+      text.classList.remove('visible');
+    } else /* if (text.getAttribute('data-for') === 'info-btn') */ {
+      text.classList.add('visible');
+    }
   });
+});

@@ -159,6 +159,11 @@
             <button id="info-btn" class="nav-btn">
                 <i class="fa-solid fa-circle-info"></i>
             </button>
+            <!-- save the current exercise book into a csv file -->
+            <button id="save-btn" class="nav-btn" onclick="convertArrayToCSV()">
+                <i class="fa-solid fa-floppy-disk"></i>
+            </button>
+            <span id="help-save" class="help-text">saves the current Exercise in .csv format</span>
             
             <!-- download exercise book template-->
             <a href="assets/data/vocabulary1.csv" download="file" class="nav-btn">
@@ -168,7 +173,7 @@
             
             <!-- : load exercise book -->
             <button id="csvFileUpload-btn" class="nav-btn">
-                <i class="fa-regular fa-rectangle-list"></i>
+                <i class="fa-solid fa-rectangle-list"></i>
             </button>
             <span id="help-file-upload" class="help-text">load an existing exercise book (.csv file)</span>
                 <!-- Hidden file input -->
