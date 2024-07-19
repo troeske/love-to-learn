@@ -321,7 +321,7 @@ body {
     cursor: pointer; 
     color: black;
     padding: 10px; 
-    margin: 0 10px; 
+    margin: 0; 
     font-size: 24px; 
     min-width: 30px; 
     min-height: 30px; 
@@ -392,6 +392,12 @@ body {
 #help-results-area {
     top: 59%;
 }
+#help-save {
+    top: -50px;
+    left: -80px;
+    width: 160px;
+}
+
 #help-download-template {
     top: 35px;
     left: -60px;
@@ -399,6 +405,6 @@ body {
 }
 #help-file-upload {
     top: 35px;
-    left: 145px;
+    left: 142px;
     width: 130px;
 }
