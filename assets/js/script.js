@@ -413,7 +413,6 @@ function handleFileSelect(event) {
     reader.readAsText(file);
 }
 
-
 // Event listeners
 
 /**
@@ -580,3 +579,36 @@ document.addEventListener('DOMContentLoaded', function() {
   greetUser();
 
 });
+
+/**
+ * function to show help text for the buttons on the page when the info button is clicked
+ * draft provided by Copilot
+ */
+/* document.addEventListener('DOMContentLoaded', function() {
+  const infoBtn = document.getElementById('info-btn');
+  const helpTexts = document.querySelectorAll('.help-text');
+ */
+  // Toggle help info visibility
+  document.getElementById('info-btn').addEventListener('click', function() {
+      let helpTexts = document.querySelectorAll('.help-text');
+      helpTexts.forEach(text => {
+          if (text.classList.contains('visible')) {
+              text.classList.remove('visible');
+          } else /* if (text.getAttribute('data-for') === 'info-btn') */ {
+              text.classList.add('visible');
+          }
+      });
+  });
+
+  // Hide help info on ESC key press or clicking anywhere on the page
+ /*  document.addEventListener('keydown', function(event) {
+      if (event.key === "Escape") {
+          helpTexts.forEach(text => text.classList.remove('visible'));
+      }
+  });
+ */
+ /*  document.addEventListener('click', function(event) {
+      if (event.target !== infoBtn && !event.target.closest('.help-text')) {
+          helpTexts.forEach(text => text.classList.remove('visible'));
+      }
+  }); */

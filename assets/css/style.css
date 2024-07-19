@@ -338,3 +338,51 @@ body {
 #csvFileInput {
     display: none;
 }
+
+/* style for the help text */
+.help-text {
+    display: none;
+    position: absolute;
+    background-color:red;
+    border: 1px solid greenyellow;
+    padding: 5px;
+    z-index: 1;
+    margin: 10px;
+    top: 15px;
+}
+
+.help-text.visible {
+    display: block;
+}
+#help-prev-button {
+    left: -20px;
+}
+#help-next-button {
+    left: 150px;
+}
+#help-delete-card {
+    left: 21px;
+    width: 90px;
+}
+#help-add-card {
+    left: -85px;
+    width: 100px;
+}
+#help-show-me {
+
+}
+#help-is-correct {
+
+}
+#help-is-incorrect {
+
+}
+#help-results-area {
+
+}
+#help-download-template {
+
+}
+#help-file-upload {
+
+}
