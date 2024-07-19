@@ -561,7 +561,7 @@ document.addEventListener('DOMContentLoaded', function() {
       i = parseInt(document.getElementById('current-card-front').textContent) -1;
       prepareLearnCard(i);
     } else {
-      alert("function " + appModus + " not implemented yet");
+      //alert("function " + appModus + " not implemented yet");
     }
     document.getElementById('translation').focus();
   });
@@ -581,14 +581,9 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 /**
- * function to show help text for the buttons on the page when the info button is clicked
- * draft provided by Copilot
+ * function to show/hide help text for the buttons on the page when the info button is clicked
+ * draft provided by Copilot needed a lot of adaptions though
  */
-/* document.addEventListener('DOMContentLoaded', function() {
-  const infoBtn = document.getElementById('info-btn');
-  const helpTexts = document.querySelectorAll('.help-text');
- */
-  // Toggle help info visibility
   document.getElementById('info-btn').addEventListener('click', function() {
       let helpTexts = document.querySelectorAll('.help-text');
       helpTexts.forEach(text => {
@@ -599,16 +594,3 @@ document.addEventListener('DOMContentLoaded', function() {
           }
       });
   });
-
-  // Hide help info on ESC key press or clicking anywhere on the page
- /*  document.addEventListener('keydown', function(event) {
-      if (event.key === "Escape") {
-          helpTexts.forEach(text => text.classList.remove('visible'));
-      }
-  });
- */
- /*  document.addEventListener('click', function(event) {
-      if (event.target !== infoBtn && !event.target.closest('.help-text')) {
-          helpTexts.forEach(text => text.classList.remove('visible'));
-      }
-  }); */

@@ -343,12 +343,16 @@ body {
 .help-text {
     display: none;
     position: absolute;
-    background-color:red;
-    border: 1px solid greenyellow;
+    background-color:#e20000;
+    border: 1px solid#e20000;
+    color:white;
+    font-size: 0.9rem;
+    font-weight: bold;
     padding: 5px;
     z-index: 1;
     margin: 10px;
-    top: 15px;
+    top: 21px;
+    text-align: center;
 }
 
 .help-text.visible {
@@ -356,33 +360,45 @@ body {
 }
 #help-prev-button {
     left: -20px;
+    top: 25px;
 }
 #help-next-button {
     left: 150px;
+    width: 110px;
+    top: 25px;
 }
 #help-delete-card {
-    left: 21px;
-    width: 90px;
-}
-#help-add-card {
-    left: -85px;
+    left: 16px;
     width: 100px;
 }
-#help-show-me {
-
+#help-add-card {
+    left: -122px;
+    width: 130px;
 }
-#help-is-correct {
+#help-show-me {
+    left: -90px;
+    width: 100px;
+}
 
+#help-is-correct {
+    left: 16px;
+    width: 86px;
 }
 #help-is-incorrect {
-
+    top: -27px;
+    left: 67px;
+    width: 93px;
 }
 #help-results-area {
-
+    top: 59%;
 }
 #help-download-template {
-
+    top: 35px;
+    left: -60px;
+    width: 180px;
 }
 #help-file-upload {
-
+    top: 35px;
+    left: 145px;
+    width: 130px;
 }
