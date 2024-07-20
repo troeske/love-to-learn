@@ -408,3 +408,30 @@ body {
     left: 142px;
     width: 130px;
 }
+
+/* Media query: tablets and larger (576px and up */
+@media screen and (min-width: 576px) {
+
+    /* the modal dialog for the user name */
+    .modal {
+        display: flex;
+        justify-content: center; 
+        align-items: center; 
+        height: 100vh; 
+        width: 100vw;
+        top: 16%;
+    }
+
+    .modal-content {
+        width: 400px; 
+        margin: auto; 
+    }
+
+
+    /* General styles */
+    body {
+        min-height: 100vh;
+        margin: 10% auto; 
+        max-width: 500px; 
+    }
+}
