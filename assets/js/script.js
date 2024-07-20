@@ -193,6 +193,10 @@ function prevCard() {
   }
 }
 
+/**
+ * Function to draw the line under the original word dynamically based on the length of the word
+ * funciton provided by Copilot
+ */
 function drawDividerFront() {
   let wordL1 = document.querySelector('#original');
   let dividerL1 = document.querySelector('#divider-front');
@@ -204,7 +208,7 @@ function drawDividerFront() {
 };
 
 /**
- * Function to draw the line under the l2 word dynamically based on the length of the word
+ * Function to draw the line under the translation dynamically based on the length of the word
  * funciton provided by Copilot
  */
 function drawDividerBack() {
@@ -237,6 +241,9 @@ function checkTranslation() {
   }
 }
 
+/**
+ * Function to show the correct translation
+ */
 function showTranslation() {
   let i = parseInt(document.getElementById('current-card-back').textContent) - 1;
   let correctTranslation = myExerciseBook[i].l2;
@@ -283,6 +290,10 @@ function visualizeResultClean() {
   document.getElementById('translation').style.backgroundColor = "white";
 }
 
+/**
+ * Function to add a new card to the exercise book
+ * @returns: adds the new card to the array of objects
+ */
 function addCard() {
   let myNewCard = [];
   myNewCard = {
@@ -350,6 +361,11 @@ function showCardContent(i) {
     return;
   } else {
     document.getElementById('original').textContent = myExerciseBook[i].l1;
+    document.getElementById('translation').textContent = myExerciseBook[i].l2;
+    document.getElementById('languages').textContent = myExerciseBook[i].languages;
+    document.getElementById('exercise-book').textContent = myExerciseBook[i].myBook;
+    document.getElementById('userName').textContent = myExerciseBook[i].author;
+    document.getElementById('topic').textContent = myExerciseBook[i].topic;
     drawDividerFront();
     document.getElementById('current-card-front').textContent = i + 1;
     document.getElementById('current-card-back').textContent = i + 1;
@@ -358,6 +374,10 @@ function showCardContent(i) {
   }
 }
 
+/**
+ * Function to check if the data has been updated and update the array if needed
+ * @returns true if the data has been updated, false if not
+ */
 function checkToUpdateData() {
   let i = parseInt(document.getElementById('current-card-front').textContent) - 1;
   let languages = document.getElementById('languages').textContent.trim();
@@ -370,6 +390,8 @@ function checkToUpdateData() {
     myExerciseBook[i].languages = document.getElementById('languages').textContent.trim();
     myExerciseBook[i].myBook = document.getElementById('exercise-book').textContent.trim();
     myExerciseBook[i].topic = document.getElementById('topic').textContent.trim();
+    myExerciseBook[i].author = document.getElementById('userName').textContent.trim();
+    return true;
   } else {
     return false;
   }
