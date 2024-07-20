@@ -37,7 +37,7 @@ body {
     font-size: 100%;
     margin: 10% auto; 
     padding: 15px 0 15px 20px;
-    width: 80%; 
+    width: 300px; 
     text-align: left;
     border: 2px solid #000; 
     border-radius: 50px; 
@@ -45,7 +45,7 @@ body {
 
 #userNameInput {
     color: black;
-    width: 150px;
+    width: 70%;
 }
 
 #submitName {
@@ -419,11 +419,11 @@ body {
         align-items: center; 
         height: 100vh; 
         width: 100vw;
-        top: 16%;
+        top: 70px;
     }
 
     .modal-content {
-        width: 400px; 
+        width: 300px; 
         margin: auto; 
     }
 
@@ -431,7 +431,33 @@ body {
     /* General styles */
     body {
         min-height: 100vh;
-        margin: 10% auto; 
+        margin: 40px auto; 
+        max-width: 500px; 
+    }
+}
+
+/* Media query: tablets and larger (768px and up */
+@media screen and (min-width: 768px) {
+    /* the modal dialog for the user name */
+    .modal {
+        display: flex;
+        justify-content: center; 
+        align-items: center; 
+        height: 100vh; 
+        width: 100vw;
+        top: 130px;
+    }
+
+    .modal-content {
+        width: 300px; 
+        margin: auto; 
+    }
+
+
+    /* General styles */
+    body {
+        min-height: 100vh;
+        margin: 90px auto; 
         max-width: 500px; 
     }
 }
