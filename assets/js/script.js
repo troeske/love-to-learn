@@ -342,8 +342,8 @@ function prepareAddCard() {
 function prepareLearnCard(i) {
   let totalCards = myExerciseBook.length;
 
-  if (i < 0 || i >= totalCards) {
-    alert("something is wrong with the card index");
+  if (i < 0 || i > totalCards) {
+    alert("something is wrong with the card index please refresh the page");
   } else {
     // set the modus to learn card
     document.getElementById('card').setAttribute('data-modus', 'learn');
@@ -616,12 +616,21 @@ document.getElementById('is-incorrect').addEventListener('click', function () {
 /**
  * EventListner for the next button
  */
-document.getElementById('next-btn-front').addEventListener('click', nextCard);
+document.getElementById('next-btn-front').addEventListener('click', function () {
+  let appModus = document.getElementById('card').getAttribute('data-modus');
+  if (appModus === "add") {
+    prepareLearnCard(0); // get back into learn mode and show the first card in the book
+    return;
+  } else {
+    nextCard();
+  }
+})
+
 document.getElementById('next-btn-back').addEventListener('click', function () {
   /* let's check if we are in add card modus */
   let appModus = document.getElementById('card').getAttribute('data-modus');
   if (appModus === "add") {
-    alert("You are in add card modus. Please finish adding the card or cancel the action.");
+    alert("You are in add card mode. Please finish adding the new card or click cancel on the backside of the card");
     return;
   } else {
     nextCard();
@@ -636,14 +645,23 @@ document.getElementById('prev-btn-back').addEventListener('click', function () {
  /* let's check if we are in add card modus */
  let appModus = document.getElementById('card').getAttribute('data-modus');
  if (appModus === "add") {
-   alert("You are in add card modus. Please finish adding the card or cancel the action.");
+   alert("You are in add card mode. Please finish adding the new card or click cancel on the backside of the card");
    return;
  } else {
   prevCard();
   document.getElementById('flip-card-back').click(); //flip to the front side
  }
 });
-document.getElementById('prev-btn-front').addEventListener('click', prevCard);
+
+document.getElementById('prev-btn-front').addEventListener('click', function () {
+  let appModus = document.getElementById('card').getAttribute('data-modus');
+  if (appModus === "add") {
+    prepareLearnCard(0); // get back into learn mode and show the first card in the book
+    return;
+  } else {
+   prevCard();
+  }
+});
 
 /**
  * set EventListner to add-card button
@@ -704,7 +722,7 @@ document.getElementById('info-btn').addEventListener('click', function () {
   helpTexts.forEach(text => {
     if (text.classList.contains('visible')) {
       text.classList.remove('visible');
-    } else /* if (text.getAttribute('data-for') === 'info-btn') */ {
+    } else {
       text.classList.add('visible');
     }
   });
