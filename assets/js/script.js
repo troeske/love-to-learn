@@ -121,7 +121,7 @@ function editH2Content(id) {
  * @returns array of objects with headers as keys
  */
 function csvToArray(csvText) {
-  //basic structure provided by Github Copilot
+  //basic structure provided by Copilot
   const csvNEWLINE = '\n';
   const csvDELIMITER = ',';
 
@@ -138,13 +138,24 @@ function csvToArray(csvText) {
 }
 
 function deleteCurrentCard() {
-  let i = parseInt(document.getElementById('current-card-front').textContent) - 1;
-  let myDeletedCard = myExerciseBook.splice(i, 1);
+  let appModus = document.getElementById('card').getAttribute('data-modus');
+  if (appModus === "add") {
+    alert("You are in add card modus. Please finish adding the card or cancel the action.");
+    document.getElementById('flip-card').click(); //flip to the back sideto let the user finish add card
+    return;
+  }
+  
+  let i = parseInt(document.getElementById('current-card-front').textContent);
+  if (confirm("Do you really want to delete card: " + i + "?")) {
+    let cardToDelete = i - 1;
+    let myDeletedCard = myExerciseBook.splice(cardToDelete, 1);
 
-  if (i >= 0 && i < myExerciseBook.length) {
-    showCardContent(i);
-  } else {
-    alert("No more cards in your exercise book");
+    let totalCards = myExerciseBook.length;
+    if (totalCards === 0) {
+      alert("No more cards in your exercise book");
+    } else {
+      showCardContent(0); //let's show the first card in the list
+    }
   }
 }
 
@@ -400,17 +411,17 @@ function checkToUpdateData() {
 /**
  * Function to handle file selection and ReadAsText
  * @param {event}  
- * @returns: sets global variable myExerciseBook with array of objects with these properties:
+ * @returns: fills global variable myExerciseBook with array of objects with these properties:
  * l1, l2, languages, exercise-book, topic, author  
  */
 function handleFileSelect(event) {
   /* check if the user already has opened an exercise book or added words manually */
   if (myExerciseBook.length !== 0) {
-    if (!confirm("Any changes you made to the current exercise book will be lost if you did not save your current exercie book. Do you want to continue?")) {
+    if (!confirm("Any changes you made to the current exercise book will be lost if you did not save your current exercise book. Do you want to continue?")) {
       return;
     }
   }
-
+  
   //basic structure provided by Copilot
   let file = event.target.files[0];
 
@@ -587,7 +598,7 @@ document.getElementById('is-incorrect').addEventListener('click', function () {
 
   if (appModus === "add") {
     // user wants to cancel his add card so let's go back to learn mode with the current card
-    i = parseInt(document.getElementById('current-card-front').textContent) - 1;
+    let i = parseInt(document.getElementById('current-card-front').textContent) - 1;
     prepareLearnCard(i);
     document.getElementById('flip-card-back').click(); //flip to the front side
   } else if (appModus === "learn") {
@@ -646,7 +657,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (appModus === "add") {
       prepareAddCard(0);
     } else if (appModus === "learn") {
-      i = parseInt(document.getElementById('current-card-front').textContent) - 1;
+      let i = parseInt(document.getElementById('current-card-front').textContent) - 1;
       prepareLearnCard(i);
     } else {
       //alert("function " + appModus + " not implemented yet");
