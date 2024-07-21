@@ -404,6 +404,13 @@ function checkToUpdateData() {
  * l1, l2, languages, exercise-book, topic, author  
  */
 function handleFileSelect(event) {
+  /* check if the user already has opened an exercise book or added words manually */
+  if (myExerciseBook.length !== 0) {
+    if (!confirm("Any changes you made to the current exercise book will be lost if you did not save your current exercie book. Do you want to continue?")) {
+      return;
+    }
+  }
+
   //basic structure provided by Copilot
   let file = event.target.files[0];
 
