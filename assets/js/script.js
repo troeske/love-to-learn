@@ -164,7 +164,7 @@ function deleteCurrentCard() {
  * @returns: updates the card with the next word in the list
  * @returns: updates the card header with the current card number
  */
-function nextCard() {
+function nextCard() {  
   let i = parseInt(document.getElementById('current-card-front').textContent) - 1; // array index of the current card (-1 of displayed card number)
   let totalCards = parseInt(document.getElementById('total-cards-front').textContent);
   if (i <= totalCards && i >= 0) {
@@ -549,6 +549,7 @@ document.getElementById("translation").addEventListener("keydown", function (eve
   }
 });
 
+/* eventListner for original inoput to flip to the back side */
 document.getElementById("input-original").addEventListener("keydown", function (event) {
   if (event.key === "Enter") {
     let appModus = document.getElementById('card').getAttribute('data-modus');
@@ -578,6 +579,7 @@ document.getElementById('enter-btn').addEventListener('click', function () {
   }
 });
 
+/* eventListner for the show-me, correct and incorrect buttons on the back side of the card */
 document.getElementById('show-me').addEventListener('click', showTranslation);
 document.getElementById('is-correct').addEventListener('click', function () {
   let appModus = document.getElementById('card').getAttribute('data-modus');
@@ -616,16 +618,30 @@ document.getElementById('is-incorrect').addEventListener('click', function () {
  */
 document.getElementById('next-btn-front').addEventListener('click', nextCard);
 document.getElementById('next-btn-back').addEventListener('click', function () {
-  nextCard();
-  document.getElementById('flip-card-back').click(); //flip to the front side
+  /* let's check if we are in add card modus */
+  let appModus = document.getElementById('card').getAttribute('data-modus');
+  if (appModus === "add") {
+    alert("You are in add card modus. Please finish adding the card or cancel the action.");
+    return;
+  } else {
+    nextCard();
+    document.getElementById('flip-card-back').click(); //flip to the front side
+  }
 });
 
 /**
  * EventListner for the previous button
  */
 document.getElementById('prev-btn-back').addEventListener('click', function () {
+ /* let's check if we are in add card modus */
+ let appModus = document.getElementById('card').getAttribute('data-modus');
+ if (appModus === "add") {
+   alert("You are in add card modus. Please finish adding the card or cancel the action.");
+   return;
+ } else {
   prevCard();
   document.getElementById('flip-card-back').click(); //flip to the front side
+ }
 });
 document.getElementById('prev-btn-front').addEventListener('click', prevCard);
 
