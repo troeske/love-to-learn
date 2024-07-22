@@ -371,12 +371,12 @@ function showCardContent(i) {
     alert("No more cards in your exercise book");
     return;
   } else {
+    document.getElementById('languages').childNodes[0].nodeValue = myExerciseBook[i].languages + ' ';
+    document.getElementById('exercise-book').childNodes[0].nodeValue = myExerciseBook[i].myBook + ' ';
+    document.getElementById('topic').childNodes[0].nodeValue = myExerciseBook[i].topic + ' ';
     document.getElementById('original').textContent = myExerciseBook[i].l1;
     document.getElementById('translation').textContent = myExerciseBook[i].l2;
-    document.getElementById('languages').textContent = myExerciseBook[i].languages;
-    document.getElementById('exercise-book').textContent = myExerciseBook[i].myBook;
     document.getElementById('userName').textContent = myExerciseBook[i].author;
-    document.getElementById('topic').textContent = myExerciseBook[i].topic;
     drawDividerFront();
     document.getElementById('current-card-front').textContent = i + 1;
     document.getElementById('current-card-back').textContent = i + 1;
