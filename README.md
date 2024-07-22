@@ -1,5 +1,5 @@
 # LOVE-TO-EARN
-This is the website for a vocabulary learning site LOVE-To-LEARN (L2L): [LOVE-TO-LEARN](https://troeske.github.io/OrganicStore/index.html). 
+This is the website for a vocabulary learning site LOVE-To-LEARN (L2L): [LOVE-TO-LEARN](https://troeske.github.io/love-to-learn/). 
 
 add motivation and goal:
 
