@@ -96,22 +96,34 @@ The Load Exercise Book function allows the loading of the downloaded template in
 Users can load their existing (or previsously saved) Exercise Books intto L2L to start learning right away.
 
 ### Learning Mode
+Core of L2L is to help user learn vocabulary. After loading an existing Exercise Book or maually entering a desired vocabulary the users can get start to learn and test their knowledge and progress.
+
 - __Navigating the Exercise Book__
-- __Testing your Knowledge__
+![Card Front](media/L2L_Card_Front_non-empty.png)
+The top of the front of the Word Card has buttons to step forward (Next Button) or backward (Previous Button) in the current Exercise Book and shows the current position in the Exercise Book. The Front also shows the original word to be learned.
+
+- __Learning and Testing your Knowledge__
+To learn the card, the user clicks on the flip card button and can press on the magnifying glass to display the translation of the original word.
+![Card Back](media/L2L_backside_enter_translation_empty.png)
+
 - __Verifying your Result__
+Once the user has mastered the word, they can either type in the translation in to the input field and press ENTER (or the Enter button). If the translation was correct, the card will turn green and the 'got it' counter increases. 
+![Correct Translation](media/L2L_translation_correct.png)
+
+If the translation was wrong the card turns red and the 'to improve' counter increases.
+![Wrong Translation](media/L2L_translation_wrong.png)
+
+The user can also keep the translation in mind and just click on the magnisfying glass to see if they were right. If they were correct, they can press the correct button below the input field. The card will turn green and the 'got it' counter increases. If they were wrong they can press the x-button  below the input field and the card turns red and the 'to improve' counter increases.
+
+The user can also flip back to the front and look at the orignal word again.
 
 ### Add a Word Card
+![Add Card Front](media/L2L_add_card_front.png)
+The user can manually add words to the current Exercise Book or start a new Exercise Book from scratch. To add words, the users clicks on the + Button on the front of the word card. When hitting Enter or clicking on flip-card, the card will turn to the backside and the user can enter the translation. L2L will save the card once the user hits Enter, clicks the Enter-Button or the Correct-Button below the input field for the translated word. Automatically the card will flip to the front to get back into learning mode.
+
 ### Delete current Word Card
-
-
-
-![Navigation Bar - Mobile](media/header-mobile.png)
-
-- __Floating Navigation Bar with Slide-Out Info__
-.
-
-![Floating Nav Bar](media/floating-nav-bar.png)
-
+The user can delete a card in the current Exercise Book by clicking on the trash button below the original word on the fron of the card. A confirm/Cancel message will pop up and the card will be deleted.
+![Delete Card](media/L2L_delete_card_message.png)
 
 ## Manual Testing
 
