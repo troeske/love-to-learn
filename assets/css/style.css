@@ -413,6 +413,34 @@ body {
     width: 130px;
 }
 
+/* Media query: small mobile phones (700px and smaller */
+@media screen and (max-height: 700px) {
+
+    /* General styles */
+    body {
+        min-height: 100vh;
+        margin: 0; 
+        max-width: 500px; 
+    }
+
+    /* the modal dialog for the user name */
+    .modal {
+        top: 30px;
+    }
+
+    .heading h1 {
+        margin: 15px 0;
+    }
+
+    .card {
+        margin: 25px auto;
+      }
+     
+    #help-results-area {
+        top: 67%;
+    }
+}
+
 /* Media query: tablets and larger (576px and up */
 @media screen and (min-width: 576px) {
 
@@ -435,9 +463,9 @@ body {
     /* General styles */
     body {
         min-height: 100vh;
-        margin: 40px auto; 
         max-width: 500px; 
     }
+
 }
 
 /* Media query: tablets and larger (768px and up */
