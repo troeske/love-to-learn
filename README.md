@@ -138,8 +138,8 @@ __Various Browsers on mobile and desktop devices:__
 | Rendering of about page | load about page | page shows as deseigned | ok |ok | ok | ok | ok | ok | ok | ok | ok |
 
 ### Open Issues
-__iOS - Chrome and iOS - Safari:__
-. 
+__Merge manual Cards when loading new Exercise Book:__
+When a user has manually entered cards and then loads an exercise book the manual cards will be lost.
 
 ## Code Validation
 ### W3 HTML Validator https://validator.w3.org/nu/#textarea

@@ -114,6 +114,10 @@ body {
     font-weight: bold;
 }
 
+.hidden-heading {
+    display: none;
+}
+
 /* card-area */
 /* Container for the card, enabling the flip effect provided by Copilot */
 .card-container {
@@ -185,7 +189,7 @@ body {
     color: black;
 }
 
-#location {
+.location {
     font-size: 1.3em;
     font-weight: bold;
     color: black;
