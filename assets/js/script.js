@@ -2,7 +2,7 @@
 var myExerciseBook = []; // global array of objects to store the vocabularies to be learned
 
 /**
- * Function to greet the user, called when page is loaded 
+ * Function to greet the user, called when page is loaded. Basic structure provided by Copilot 
  * @returns: prompts the user for their name and updates the greeting on the page
  */
 function greetUser() {
@@ -79,7 +79,7 @@ function editH2Content(id) {
     document.removeEventListener('keyup', escKeyListener);
   }
 
-  // Function to revert to original h2 text provided by Copilot
+  // Function to revert to original h2 text
   function revertToOriginalText() {
     h2Element.childNodes[0].nodeValue = currentText + ' ';
     h2Element.style.visibility = 'visible';
@@ -96,14 +96,14 @@ function editH2Content(id) {
     }
   });
 
-  // Event listener for clicks outside the input field provided by Copilot
+  // Event listener for clicks outside the input field
   function outsideClickListener(event) {
     if (!inputField.contains(event.target) && !h2Element.contains(event.target)) {
       revertToText();
     }
   }
 
-  // Event listener for Esc key provided by Copilot
+  // Event listener for Esc key 
   function escKeyListener(event) {
     if (event.key === 'Escape') {
       revertToOriginalText();
@@ -116,7 +116,7 @@ function editH2Content(id) {
 }
 
 /**
- * Function to handle CSV to Array conversion
+ * Function to handle CSV to array conversion
  * @param {csvText} from FileReader 
  * @returns array of objects with headers as keys
  */
@@ -413,6 +413,7 @@ function checkToUpdateData() {
  * @param {event}  
  * @returns: fills global variable myExerciseBook with array of objects with these properties:
  * l1, l2, languages, exercise-book, topic, author  
+ * provided by Copilot 
  */
 function handleFileSelect(event) {
   /* check if the user already has opened an exercise book or added words manually */
