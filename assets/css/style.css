@@ -409,8 +409,8 @@ body {
     width: 130px;
 }
 
-/* Media query: small mobile phones (700px and smaller */
-@media screen and (max-height: 700px) {
+/* Media query: small mobile phones (740px and smaller */
+@media screen and (max-height: 740px) {
 
     /* General styles */
     body {
@@ -484,7 +484,7 @@ body {
     } 
 
     .bottom-nav {
-        bottom: 5vh; 
+        bottom: 8vh; 
         left: 50%; 
     }
     
@@ -495,7 +495,7 @@ body {
 
     /* General styles */
     body {
-        padding: 90px; 
+        padding: 60px; 
         max-width: 500px; 
         margin: auto;
     }
@@ -504,11 +504,6 @@ body {
         width: 300px; 
     }
     
-    .bottom-nav {
-        bottom: 5vh; 
-        left: 50%; 
-    }
-
     #help-results-area {
         top: 615px;
     }
