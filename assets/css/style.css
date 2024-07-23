@@ -478,17 +478,29 @@ body {
         left: 50%;
     }
 
-
     /* General styles */
     body {
         padding: 90px; 
         max-width: 500px; 
         margin: auto;
     }
-
+    
+    .card {
+        width: 300px; 
+    }
     .bottom-nav {
         bottom: 15vh; 
         left: 50%; 
-        
+    }
+
+    #help-results-area {
+        top: 715px;
+    }
+}
+
+/* Media query: tablets and larger (1024px and up */
+@media screen and (min-width: 1024px) {
+    #help-results-area {
+        top: 740px;
     }
 }
