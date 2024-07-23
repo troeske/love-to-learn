@@ -9,13 +9,8 @@ body {
     min-height: 100vh;
     font-family: 'Roboto', sans-serif;
     color: white; 
-    margin: 0; 
-    padding: 0; 
     background: rgb(0,9,3);
-    height: 100vh;
-    left: 0;
     position: relative;
-    top: 0;
 }
 
 /* the modal dialog for the user name */
@@ -24,9 +19,9 @@ body {
     position: fixed;
     z-index: 99; 
     left: 0;
-    top: 6%;
+    top: 6vh;
     width: 100%; 
-    height: 100%; 
+    height: 100vh; 
     overflow: auto;
 }
 
@@ -65,14 +60,15 @@ body {
 .heading {
     font-family: 'Roboto', sans-serif; 
     text-align: center; 
-    margin: 10% auto 5%; 
+    margin: 0 auto 10px; 
     width: 80%; 
 }
 
 .heading h1 {
     font-size: 1.6em; 
     font-weight: bold; 
-    margin: 15px 0 30px 0;
+    padding: 5vh;
+    margin: 0;
     text-transform: uppercase;
 }
 
@@ -296,7 +292,7 @@ body {
 /* Style for the bottom navigation */
 .bottom-nav {
     position: fixed; 
-    bottom: 8%; 
+    bottom: 8vh; 
     left: 50%; 
     transform: translateX(-50%); /* Adjust for true centering */
     display: flex; 
@@ -394,7 +390,7 @@ body {
     width: 93px;
 }
 #help-results-area {
-    top: 59%;
+    top: 580px;
 }
 #help-save {
     top: -50px;
@@ -418,8 +414,6 @@ body {
 
     /* General styles */
     body {
-        min-height: 100vh;
-        margin: 0; 
         max-width: 500px; 
     }
 
@@ -429,15 +423,19 @@ body {
     }
 
     .heading h1 {
-        margin: 15px 0;
-    }
+        padding: 15px 0;
+    } 
 
     .card {
         margin: 25px auto;
       }
-     
+
+    .bottom-nav {
+        bottom: 7vh; 
+    }
+
     #help-results-area {
-        top: 67%;
+        top: 470px;
     }
 }
 
@@ -446,11 +444,6 @@ body {
 
     /* the modal dialog for the user name */
     .modal {
-        display: flex;
-        justify-content: center; 
-        align-items: center; 
-        height: 100vh; 
-        width: 100vw;
         top: 70px;
     }
 
@@ -459,37 +452,43 @@ body {
         margin: auto; 
     }
 
-
     /* General styles */
     body {
-        min-height: 100vh;
         max-width: 500px; 
     }
-
 }
 
 /* Media query: tablets and larger (768px and up */
 @media screen and (min-width: 768px) {
+    html {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     /* the modal dialog for the user name */
     .modal {
-        display: flex;
-        justify-content: center; 
-        align-items: center; 
-        height: 100vh; 
-        width: 100vw;
-        top: 130px;
+        width: 100%;
+        top: 245px;
     }
 
     .modal-content {
         width: 300px; 
-        margin: auto; 
+        left: 50%;
     }
 
 
     /* General styles */
     body {
-        min-height: 100vh;
-        margin: 90px auto; 
+        padding: 90px; 
         max-width: 500px; 
+        margin: auto;
+    }
+
+    .bottom-nav {
+        bottom: 15vh; 
+        left: 50%; 
+        
     }
 }

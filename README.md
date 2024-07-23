@@ -1,5 +1,7 @@
 # LOVE-TO-EARN
 This is the website for a vocabulary learning: LOVE-To-LEARN (L2L): [LOVE-TO-LEARN](https://troeske.github.io/love-to-learn/). 
+<br>
+<img src="media/L2L_landing_page_book_loaded.png"  width="300" height="auto" alt="Love-To-Learn Landing Page">
 
 I was inspired to implement this site after helping one of my daughters to learn english vocabulary focussed on certain topics (in her case crime & punishment and UK disparities) for her highschool exam a 3 weeks ago. Though she has successfully passed her exam already before I started the web app, it served as my inspiration and decisions on MVP functionality. With this past but real use case in mind I probably got carried away with MVP functionality and it turned into an NVP: Nice Viable Product. 
 
@@ -229,9 +231,12 @@ __Various Browsers on mobile and desktop devices:__
 | 61 | load exercise book        | user has typed in a few word pairs and then clicks 'load exercise book' button                                                     | warning appears that data will be lost                                                                                                                                                                   | ok              | ok               | ok            | ok           | ok         | ok              | ok              | ok               |
 | 62 | UI/UX                     | mobile phone landscape mode                                                                                                        | known issue                                                                                                                                                                                              | nok             | nok              | nok           | nok          | nok        | nok             | nok             | nok              |
 
-### Open Issues
+### Open/Known Issues
 __Merge manual Cards when loading new Exercise Book:__
-When a user has manually entered cards and then loads an exercise book the manual cards will be lost.
+    (1) When a user has manually entered cards and then loads an exercise book the manual cards will be lost. In this release only a worning apears and the user can abbort if necessary.
+    (2) On mobile browsers Firefox, Edge and safari there a some layout issues with showing the help texts and with the nav bar that floats up when keyboard is opened. 
+    (3) When adding a new card and user click the incorrect button the card turn read and incorrect counter is increased. Correct behaviour is to clean the translation.
+
 
 ## Code Validation
 ### W3 HTML Validator https://validator.w3.org/nu/#textarea
@@ -276,6 +281,7 @@ The core of following functions was provided by Github Copilot:
     (5)  basic struncture of editH2Content() (especially the ***.childNodes[0].nodeValue solution)
     (6)  the basic structure idea of a modal dialog of the greetUser() function 
 
+I used https://tabletomarkdown.com/convert-spreadsheet-to-markdown/ to convert my Google Sheets manual testing matrix into a to table for this readme.
 
 ### Graphics
 icons: https://fontawesome.com/

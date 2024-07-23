@@ -74,6 +74,10 @@ function editH2Content(id) {
     h2Element.childNodes[0].nodeValue = inputField.value + ' ';
     h2Element.style.visibility = 'visible';
     inputField.style.display = 'none';
+
+    /* let's check if the user has edited any data and update array if needed */
+    checkToUpdateData();
+    
     // Remove event listeners to avoid memory leaks
     document.removeEventListener('click', outsideClickListener);
     document.removeEventListener('keyup', escKeyListener);
