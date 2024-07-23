@@ -233,9 +233,11 @@ __Various Browsers on mobile and desktop devices:__
 
 ### Open/Known Issues
 __Merge manual Cards when loading new Exercise Book:__
-    (1) When a user has manually entered cards and then loads an exercise book the manual cards will be lost. In this release only a worning apears and the user can abbort if necessary.
-    (2) On mobile browsers Firefox, Edge and safari there a some layout issues with showing the help texts and with the nav bar that floats up when keyboard is opened. 
-    (3) When adding a new card and user click the incorrect button the card turn read and incorrect counter is increased. Correct behaviour is to clean the translation.
+
+    (1)  When a user has manually entered cards and then loads an exercise book the manual cards will be lost. In this release only a worning apears and the user can abbort if necessary.
+    (2)  On mobile browsers Firefox, Edge and safari there a some layout issues with showing the help texts and with the nav bar that floats up when keyboard is opened. 
+    (3) hen adding a new card and user click the incorrect button the card turn read and incorrect counter is increased. Correct behaviour is to clean the translation.
+    
 
 
 ## Code Validation

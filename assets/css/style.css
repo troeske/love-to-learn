@@ -441,7 +441,13 @@ body {
 
 /* Media query: tablets and larger (576px and up */
 @media screen and (min-width: 576px) {
-
+    html {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
     /* the modal dialog for the user name */
     .modal {
         top: 70px;
@@ -470,9 +476,18 @@ body {
     /* the modal dialog for the user name */
     .modal {
         width: 100%;
-        top: 245px;
+        top: 145px;
     }
 
+    .heading h1 {
+        padding: 15px 0;
+    } 
+
+    .bottom-nav {
+        bottom: 5vh; 
+        left: 50%; 
+    }
+    
     .modal-content {
         width: 300px; 
         left: 50%;
@@ -488,19 +503,38 @@ body {
     .card {
         width: 300px; 
     }
+    
     .bottom-nav {
-        bottom: 15vh; 
+        bottom: 5vh; 
         left: 50%; 
     }
 
     #help-results-area {
-        top: 715px;
+        top: 615px;
     }
 }
 
 /* Media query: tablets and larger (1024px and up */
 @media screen and (min-width: 1024px) {
+    body {
+        padding: 60px; 
+    }
+    
+    .modal {
+        width: 100%;
+        top: 120px;
+    }
+
+    .heading h1 {
+        padding: 5px 0 30px;
+    } 
+
     #help-results-area {
-        top: 740px;
+        top: 590px;
+    }
+    
+    .bottom-nav {
+        bottom: 7vh; 
+        left: 50%; 
     }
 }
