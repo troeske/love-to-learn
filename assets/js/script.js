@@ -23,7 +23,7 @@ function greetUser() {
         document.getElementById("userName").textContent = "Mr./Mrs. Incognito";
       }
     }
-  })
+  });
 
   // When the user clicks on the cancel button, close the modal
   document.getElementById('cancelName').addEventListener('click', function () {
@@ -48,7 +48,7 @@ function greetUser() {
       modal.style.display = "none";
       document.getElementById("userName").textContent = "Mr./Mrs. Incognito";
     }
-  }
+  };
 }
 
 /**
@@ -77,7 +77,7 @@ function editH2Content(id) {
 
     /* let's check if the user has edited any data and update array if needed */
     checkToUpdateData();
-    
+
     // Remove event listeners to avoid memory leaks
     document.removeEventListener('click', outsideClickListener);
     document.removeEventListener('keyup', escKeyListener);
@@ -201,7 +201,7 @@ function prevCard() {
     visualizeResultClean();
 
     // let's show the previous card content
-    i--
+    i--;
     showCardContent(i);
   } else {
     alert("No more cards in your exercise book");
@@ -220,7 +220,7 @@ function drawDividerFront() {
     let width = wordL1.offsetWidth;
     dividerL1.style.width = width + 'px'; // Set the width of the .hand-drawn-divider for original to match
   }
-};
+}
 
 /**
  * Function to draw the line under the translation dynamically based on the length of the word
@@ -234,7 +234,7 @@ function drawDividerBack() {
     let width = wordL2.offsetWidth;
     dividerL2.style.width = width + 'px'; // Set the width of the .hand-drawn-divider for transaltion to match
   }
-};
+}
 
 /**
  * Function to check the translation
@@ -454,8 +454,8 @@ function handleFileSelect(event) {
     document.getElementById('total-cards-back').textContent = myExerciseBook.length;
 
     /* let's clean the right / wrong counter */
-    document.getElementById('correct').textContent = "0"
-    document.getElementById('incorrect').textContent = "0"
+    document.getElementById('correct').textContent = "0";
+    document.getElementById('incorrect').textContent = "0";
     // set the modus to learn card
     document.getElementById('card').setAttribute('data-modus', 'learn');
   };
@@ -550,7 +550,7 @@ document.getElementById("translation").addEventListener("keydown", function (eve
     }
 
   } else {
-    document.getElementById("translation").placeholder = ""
+    document.getElementById("translation").placeholder = "";
   }
 });
 
@@ -629,7 +629,7 @@ document.getElementById('next-btn-front').addEventListener('click', function () 
   } else {
     nextCard();
   }
-})
+});
 
 document.getElementById('next-btn-back').addEventListener('click', function () {
   /* let's check if we are in add card modus */
