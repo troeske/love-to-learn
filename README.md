@@ -3,7 +3,7 @@ This is the website for vocabulary learning: LOVE-To-LEARN (L2L): [LOVE-TO-LEARN
 <br>
 <img src="media/L2L_landing_page_book_loaded.png"  width="300" height="auto" alt="Love-To-Learn Landing Page">
 
-I was inspired to implement this site after helping one of my daughters to learn English vocabulary focused on certain topics (in her case crime & punishment and UK disparities) for her high school exam a 3 weeks ago. Though she has successfully passed her exam already before I started the web app, it served as my inspiration and decisions on MVP functionality. With this past but real use case in mind I got carried away with MVP functionality and it turned into an NVP: Nice Viable Product. 
+I was inspired to implement this site after helping one of my daughters to learn English vocabulary focused on certain topics (in her case crime & punishment and UK disparities) for her high school exam 3 weeks ago. Though she has successfully passed her exam already before I started the web app, it served as my inspiration and decisions on MVP functionality. With this past but real use case in mind I got carried away with MVP functionality and it turned into an NVP: Nice Viable Product with quite some complexity and advanced functionality. 
 
 ## User Experience
 
@@ -24,7 +24,8 @@ I was inspired to implement this site after helping one of my daughters to learn
     (9) help with pronouncing the words correctly
     (10) saving learning progress beyond the current session
     (11) voice to text entering
-    (12) more complex learning cards for flexible content (pictures, lists etc.) to facilitate learning any kind of content 
+    (12) more complex learning cards for flexible content (pictures, lists etc.) to facilitate learning any kind of content
+    (13) ask user to save when leaving the page 
 
 ## Design
 ### Site Structure
@@ -241,8 +242,9 @@ __Various Browsers on mobile and desktop devices:__
 __Merge manual Cards when loading new Exercise Book:__
 
     (1)  When a user has manually entered cards and then loads an exercise book the manual cards will be lost. In this release only a warning appears, and the user can abort if necessary.
-    (2)  On mobile browsers Firefox, Edge and safari there are some layout issues with showing the help texts and with the nav bar that floats up when keyboard is opened. 
-    (3) When adding a new card and user click the incorrect button the card turn read and incorrect counter is increased. Correct behavior is to clean the translation.
+    (2) On mobile browsers Firefox, Edge and safari there are some layout issues with showing the help texts and with the nav bar that floats up when keyboard is opened.
+    (3) more complex learning cards for flexible content (pictures, lists etc.) to facilitate learning any kind of content
+    (4) ask user to save when leaving the page 
 
 
 
